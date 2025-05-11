@@ -30,6 +30,11 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		580E925A2DD08BDC003FFFBB /* Model */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Model;
+			sourceTree = "<group>";
+		};
 		F97685A92DC204B500745856 /* ByteO */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ByteO;
@@ -75,6 +80,7 @@
 		F976859E2DC204B500745856 = {
 			isa = PBXGroup;
 			children = (
+				580E925A2DD08BDC003FFFBB /* Model */,
 				F97685A92DC204B500745856 /* ByteO */,
 				F97685B72DC204B700745856 /* ByteOTests */,
 				F97685C12DC204B700745856 /* ByteOUITests */,
@@ -108,6 +114,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				580E925A2DD08BDC003FFFBB /* Model */,
 				F97685A92DC204B500745856 /* ByteO */,
 			);
 			name = ByteO;
