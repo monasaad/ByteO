@@ -11,7 +11,7 @@ import SwiftUI
 struct ByteOApp: App {
     var body: some Scene {
         WindowGroup {
-            MainScreen()
+            DecryptionGameView()
         }
     }
 }
