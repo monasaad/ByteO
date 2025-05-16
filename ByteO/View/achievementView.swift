@@ -25,7 +25,6 @@ struct achievementView: View {
                     }
                 }
             }
-            .navigationTitle("Achievements")
         }
     }
 }

@@ -1,8 +1,8 @@
 ////
-////  Settings.swift
-////  ByteO
+////  Model.swift
+////  testgame
 ////
-////  Created by Shatha Almukhaild on 13/11/1446 AH.
+////  Created by atheer alshareef on 15/05/2025.
 ////
 //
 import Foundation
@@ -15,10 +15,12 @@ import SwiftUI
 class Settings {
      var id: UUID
      var soundMuted: Bool
+    var hasSeenIntro: Bool // جديد 👇
 
-    init(id: UUID = UUID(), soundMuted: Bool = false) {
+    init(id: UUID = UUID(), soundMuted: Bool = false, hasSeenIntro: Bool = false) {
         self.id = id
         self.soundMuted = soundMuted
+        self.hasSeenIntro = hasSeenIntro
     }
 }
 
@@ -32,8 +34,10 @@ class Player {
      var playerScore: Int
      var coins: Int
      var attempts: Int
+    var lastAttemptsReset: Date?
     
-    init(id: UUID = UUID(), gamePlayer_ID: GameCenterPlayer? = nil, playerAchievements: [PlayerAchievement] = [], levelsCompleted: String = "", playerScore: Int = 0, coins: Int = 1000, attempts: Int = 3 ) {
+    init(id: UUID = UUID(), gamePlayer_ID: GameCenterPlayer? = nil, playerAchievements: [PlayerAchievement] = [],levelsCompleted: String = "", playerScore: Int = 0,coins: Int = 1000,attempts: Int = 3,lastAttemptsReset: Date? = nil)
+    {
         self.id = id
         self.gamePlayer_ID = gamePlayer_ID
         self.playerAchievements = playerAchievements
@@ -41,45 +45,67 @@ class Player {
         self.playerScore = playerScore
         self.coins = coins
         self.attempts = attempts
+        self.lastAttemptsReset = lastAttemptsReset // ✅ أضف هذا
     }
 }
 
 
 
-/// يمثل مستوى واحد: رقمه، أسئلته، وحالته المكتملة
-//@Model
-//class Level: Identifiable {
-//    var id: Int                  // رقم المستوى
-//    var questions: [Question]
-//    var isCompleted: Bool = false
-//
-//    init(id: Int, questions: [Question], isCompleted: Bool = false) {
-//        self.id = id
-//        self.questions = questions
-//        self.isCompleted = isCompleted
-//       
-//    }
-//}
-
 @Model
 class Level: Identifiable {
   var id: Int
+  //let levelNumber: Int
   var isCompleted: Bool
-
-  init(id: Int, isCompleted: Bool = false) {
+  //  var questions: [Question]
+  init(id: Int, isCompleted: Bool = false) //, questions: [Question]
+    {
     self.id = id
     self.isCompleted = isCompleted
+    //self.questions = questions
   }
 }
-struct Question: Identifiable {
-    let id = UUID()
-    let questionText: String
-    let correctAnswer: String
-    let key: String
-    let hint: String
+
+@Model
+class Question: Identifiable {
+    var id: UUID
+    var questionText: String
+    var correctAnswer: String
+    var key: String
+    var hint: String
     var hintUsesAllowed: Int
-    var hintUsed: Int = 0
+    var hintUsed: Int
+
+    init(questionText: String, correctAnswer: String, key: String, hint: String, hintUsesAllowed: Int, hintUsed: Int = 0) {
+        self.id = UUID()
+        self.questionText = questionText
+        self.correctAnswer = correctAnswer
+        self.key = key
+        self.hint = hint
+        self.hintUsesAllowed = hintUsesAllowed
+        self.hintUsed = hintUsed
+    }
 }
+
+
+//// MARK: - Question Model
+//struct Question {
+//    let id: Int
+//    let questionText: String
+//    let encryptedText: String
+//    let key: Int
+//    let answers: [String]
+//    let correctAnswer: String
+//    let hint: Hint
+//}
+//// MARK: - Hint Model
+//struct Hint {
+//    let hintText: String
+//    let isUsed: Bool
+//    let requiresAd: Bool
+//}
+//
+
+
 
 final class QuestionBank {
     static let shared = QuestionBank()
@@ -90,27 +116,27 @@ final class QuestionBank {
             Question(
                 questionText: "Decrypt the message",
                 correctAnswer: "AAAAA",
-                key: "2",
+                key: "3",
                 hint: "Shift letters backward by 3",
-                hintUsesAllowed: 2
+                hintUsesAllowed: 1
             )
         ],
         2: [
             Question(
                 questionText: "Find the secret",
                 correctAnswer: "BAAAA",
-                key: "2",
+                key: "5",
                 hint: "Use key 5 for each letter",
-                hintUsesAllowed: 2
+                hintUsesAllowed: 1
             )
         ],
         3: [
             Question(
-                questionText: "Find the secret",
+                questionText: "Find the secret 3",
                 correctAnswer: "CAAAA",
                 key: "2",
-                hint: "Use key 5 for each letter",
-                hintUsesAllowed: 2
+                hint: "Use key 6 for each letter",
+                hintUsesAllowed: 1
             )
         ]
         // يمكنك إضافة مستويات جديدة هنا
@@ -195,9 +221,6 @@ class GameCenterPlayer {
 }
 
 //// GameDataStore.swift
-
-
-
 
 @Model
  class GameDataStore {
