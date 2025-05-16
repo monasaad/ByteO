@@ -33,101 +33,113 @@ struct MainMenuView: View {
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-
+                
                 VStack {
                     HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 12) {
+                        VStack() {
                             // ⚙️ الإعدادات / صفحة الإنجازات
                             Button(action: {
                                 showAchievements = true
                             }) {
-                                Image(systemName: "gearshape.fill")
-                                    .foregroundColor(.white)
-                                    .padding()
+                                Image(systemName: "gearshape")
+                                // .resizable()
+                                    .frame(width: 40, height: 20)
+                                    .padding(10)
                                     .background(.ultraThinMaterial)
+                                    .foregroundColor(.white)
                                     .clipShape(Circle())
                             }
                             .sheet(isPresented: $showAchievements) {
-                                Text("🚧 صفحة الإنجازات تحت التطوير")
-                                    .font(.title)
-                                    .padding()
                             }
-
+                            .padding(.bottom, 1)
                             // 🔇 زر الصوت
                             Button(action: toggleSound) {
                                 Image(systemName: settings?.soundMuted == true ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                                    .foregroundColor(.white)
-                                    .padding()
+                                    .frame(width: 40, height: 20)
+                                    .padding(10)
                                     .background(.ultraThinMaterial)
+                                    .foregroundColor(.white)
                                     .clipShape(Circle())
                             }
-
+                            
                             // 👜 الكوينز
                             HStack(spacing: 6) {
-                                Image(systemName: "wallet.pass.fill")
+                                Image(systemName: "creditcard.fill")
+                                    .frame(width: 40, height: 20)
+                                    .padding(10)
+                                    .background(.ultraThinMaterial)
                                     .foregroundColor(.white)
+                                    .clipShape(Circle())
+                                
                                 Text("\(player?.coins ?? 0)")
                                     .foregroundColor(.white)
+                                
                             }
+                            .frame(width: 40, height: 20)
                             .padding(10)
-                            .background(.ultraThinMaterial)
-                            .cornerRadius(12)
+                            //.background(.ultraThinMaterial)
+                            .foregroundColor(.white)
+                            // .clipShape(Circle())
                         }
-                        .padding(.leading, 20)
-
+                        .padding(.leading, -20)
+                        .padding(.bottom, -140)
                         Spacer()
                     }
-                    Spacer()
-
+                    
+                    
+                    
+                    VStack(){
+                     Spacer()
                     // 🐱 صورة القطة
                     Image("cat_avatar")
                         .resizable()
-                        .scaledToFit()
-                        .frame(width: 220)
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 300)
 
                     // أزرار اللعب والخريطة
-                    HStack(spacing: 30) {
-                        Button("Map") {
-                            checkForReset()
-                            navigateToMap = true
-                        }
-                        .font(.title2.bold())
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 12)
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(15)
-
-                        Button("Play") {
-                            if gameData.isEmpty {
-                                let levels = (1...10).map { Level(id: $0) }
-                                let player = Player()
-                                let settings = Settings()
-                                let store = GameDataStore(player: player, settings: settings, levels: levels)
-
-                                context.insert(store)
-                                try? context.save()
-
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        VStack() {
+                            
+                            Button("Play") {
+                                if gameData.isEmpty {
+                                    let levels = (1...10).map { Level(id: $0) }
+                                    let player = Player()
+                                    let settings = Settings()
+                                    let store = GameDataStore(player: player, settings: settings, levels: levels)
+                                    
+                                    context.insert(store)
+                                    try? context.save()
+                                    
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                        navigateToIntro = true
+                                    }
+                                } else if let seen = gameData.first?.settings.hasSeenIntro, !seen {
+                                    gameData.first?.settings.hasSeenIntro = true
+                                    try? context.save()
                                     navigateToIntro = true
+                                } else {
+                                    checkForReset()
+                                    navigateToMap = true
                                 }
-                            } else if let seen = gameData.first?.settings.hasSeenIntro, !seen {
-                                gameData.first?.settings.hasSeenIntro = true
-                                try? context.save()
-                                navigateToIntro = true
-                            } else {
+                            }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.c3)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
+                          //  .frame(width: 900, height: 50)
+                            Button("Map") {
                                 checkForReset()
                                 navigateToMap = true
                             }
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(.ultraThinMaterial)
+                            .cornerRadius(10)
                         }
-                        .font(.title2.bold())
-                        .padding(.horizontal, 40)
-                        .padding(.vertical, 12)
-                        .background(.ultraThinMaterial)
-                        .cornerRadius(15)
-                    }
-                    .padding(.bottom, 40)
                 }
-
+            }
                 // الروابط
                 NavigationLink(destination: MapView(), isActive: $navigateToMap) { EmptyView() }.hidden()
                 NavigationLink(destination: IntroView(), isActive: $navigateToIntro) { EmptyView() }.hidden()

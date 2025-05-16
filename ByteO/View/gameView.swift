@@ -44,12 +44,10 @@ struct InfiniteLetterPicker: View {
     }
 }
 
-import SwiftUI
-import SwiftData
-
+////
+///
 struct DecryptionGameView: View {
-    let levelID: Int // ← المستوى الحالي
-
+    let levelID: Int
     @Environment(\.modelContext) private var context
     @Query var players: [Player]
     @Query var gameData: [GameDataStore]
