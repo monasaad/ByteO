@@ -144,7 +144,7 @@ struct CoinsShop: View {
                                         .bold()
                                         .foregroundColor(.white)
                                         .offset(y: -10)
-                                    Image("Image")
+                                    Image("Coins")
                                         .resizable()
                                         .frame(width: 100, height: 100) // نفس حجم الصورة في كل خيار
                                         .offset(y: -10) // رفع الصورة قليلاً للأعلى
@@ -178,7 +178,7 @@ struct CoinsShop: View {
                                         .bold()
                                         .foregroundColor(.white)
                                         .offset(y: -10)
-                                    Image("Image1")
+                                    Image("TwoCoins")
                                         .resizable()
                                         .frame(width: 100, height: 100)
                                         .offset(y: -10)
@@ -213,7 +213,7 @@ struct CoinsShop: View {
                                         .foregroundColor(.white)
                                         .offset(y: -9)
                                         .padding(.trailing,10)
-                                    Image("Image2")
+                                    Image("Coin")
                                         .resizable()
                                         .frame(width: 100, height: 100)
                                         .offset(y: -10)
