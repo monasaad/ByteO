@@ -2,115 +2,23 @@ import SwiftUI
 
 struct CoinsShop: View {
     @AppStorage("currentLevel") var currentLevel: Int = 0
-    @State private var showMap = false
-    @State private var showGame = false
-    @State private var showPopup = false // Show pop-up when credit card button is pressed
+  
+    @State private var coinsPopup = true // Show pop-up when credit card button is pressed
     
     var body: some View {
-        NavigationStack {
+     //
             ZStack {
-                // 🔹 الخلفية
-                Image("menu_background")
-                    .resizable()
-                    .scaledToFill()
-                    .ignoresSafeArea()
-
-                // 🔹 الأيقونات أعلى يسار الشاشة
-                VStack {
-                    HStack {
-                        Button(action: {
-                            showPopup.toggle() // Show the pop-up when the credit card button is pressed
-                        }) {
-                            Image(systemName: "wallet.bifold.fill")
-                                .resizable()
-                                .frame(width: 30, height: 20)
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-
-                        Button(action: {}) {
-                            Image(systemName: "speaker.wave.2.fill")
-                                .resizable()
-                                .frame(width: 25, height: 25)
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-
-                        Spacer()
-                    }
-                    .padding([.leading, .top], 20)
-
-                    Spacer()
-                }
-
-                // 🔹 صورة بياتو + الأزرار تحتها
-                VStack(spacing: 10) { // 🔽 قللنا المسافة من 30 إلى 10
-                    Spacer()
-
-                    Image("piato")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300)
-
-                    HStack(spacing: 40) {
-                        // زر Map
-                        Button(action: { showMap = true }) {
-                            Text("Map")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(.ultraThinMaterial)
-                                .cornerRadius(10)
-                                
-                        }
-
-                        // زر Play
-                        Button(action: {
-                            if currentLevel == 0 {
-                                showMap = true
-                            } else {
-                                showGame = true
-                            }
-                        }) {
-                            Text("Play")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(.ultraThinMaterial)
-                                .cornerRadius(10)
-                                
-                        }
-
-                        // زر Learn
-                        Button(action: {
-                            // لاحقًا
-                        }) {
-                            Text("Learn")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                                .padding()
-                                .background(.ultraThinMaterial)
-                                .cornerRadius(10)
-                                
-                        }
-                    }
-
-                    Spacer()
-                }
-                
                 // 🔹 Pop-up view when the credit card button is pressed
-                if showPopup {
+                if coinsPopup {
                     VStack {
                         Spacer()
 
                         VStack(spacing: 20) {
+                            
                             HStack {
+                           // Spacer()
                                 Button(action: {
-                                    showPopup.toggle() // Close pop-up
+                                    coinsPopup.toggle() // Close pop-up
                                 }) {
                                     Image(systemName: "xmark")
                                         .resizable()
@@ -118,22 +26,40 @@ struct CoinsShop: View {
                                         .foregroundColor(.white) // اللون الأبيض للأيقونة
                                         .background(
                                             Circle() // استخدام دائرة خلفية
-                                                .fill(Color.black.opacity(0.3)) // تعبئة الدائرة باللون الأسود الشفاف
+                                                .fill(Color.orange.opacity(0.3)) // تعبئة الدائرة باللون الأسود الشفاف
                                                 .frame(width: 40, height: 40) // حجم أصغر للدائرة
                                         )
                                         .overlay(
                                             Circle() // دائرة حول الأيقونة
-                                                .stroke(Color.c3, lineWidth: 3) // إضافة ستروك باللون السماوي
+                                                .stroke(Color.white, lineWidth: 1) // إضافة ستروك باللون السماوي
                                                 .frame(width: 40, height: 40) // نفس حجم الدائرة لضمان التناسق
                                         )
-                                        .shadow(color: Color.white.opacity(0.9), radius: 10, x: 0, y: 0) // إضافة الظل الأبيض مع تعديل الشفافية والاتجاه
+                                        .shadow(color: Color.orange.opacity(0.9), radius: 10)
+                                    // إضافة الظل الأبيض مع تعديل الشفافية والاتجاه
                                 }
+                                .padding(.leading,30) // ✅ Push away from the left edge
+
+                               // Spacer()
+                        //Spacer()
+                               Spacer()
+                            
+                           
+                                Text("Coins Shop")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .bold()
 
 
-                                .padding(.top, 5) // التأكد من وجود المسافة من الأعلى
+                                //Spacer()
+                               // Spacer()
+                               // Spacer()
+                                Spacer()
+                             //  Spacer()
+                                
                             }
+                         
 
-                            .padding(.trailing, 650) // إضافة padding من اليسار لجعل الزر قريب من الحافة
+                           // .padding(.trailing, 650) // إضافة padding من اليسار لجعل الزر قريب من الحافة
 
                             // Horizontal layout for purchase options
                             HStack(spacing: 70) {
@@ -262,11 +188,8 @@ struct CoinsShop: View {
                 }
 
             }
-            .navigationBarHidden(true)
-            .navigationDestination(isPresented: $showMap) {
-                MapView()
-            }
-        }
+         
+        
     }
 }
 

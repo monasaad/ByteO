@@ -55,6 +55,7 @@ class Player {
 class Level: Identifiable {
   var id: Int
   //let levelNumber: Int
+    
   var isCompleted: Bool
   //  var questions: [Question]
   init(id: Int, isCompleted: Bool = false) //, questions: [Question]

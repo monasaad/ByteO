@@ -77,8 +77,16 @@ struct DecryptionGameView: View {
     var currentLevel: Int { levelID }
 
     var body: some View {
-        NavigationView {
+      
             ZStack {
+                NavigationLink("", destination: MainMenuView(), isActive: $navigateToMainMenu).hidden()
+                NavigationLink(
+                         destination: MapView(),
+                         isActive: $navigateToMap
+                     ) {
+                         EmptyView()
+                     }
+                     .hidden()
                 Color.black.opacity(0.6).edgesIgnoringSafeArea(.all).blur(radius: showHintPopup ? 5 : 0)
                 Image("bg").resizable().edgesIgnoringSafeArea(.all)
 
@@ -95,9 +103,9 @@ struct DecryptionGameView: View {
                         Button("نعم", role: .destructive) { navigateToMainMenu = true }
                         Button("إلغاء", role: .cancel) {}
                     }
-                    NavigationLink("", destination: MainMenuView(), isActive: $navigateToMainMenu).hidden()
+                 
                     
-                    NavigationLink(destination: MapView(), isActive: $navigateToMap) { EmptyView() }.hidden()
+//                    NavigationLink(destination: MapView(), isActive: $navigateToMap) { EmptyView() }.hidden()
 
                     Button(action: { showWalletPopup = true }) {
                         HStack {
@@ -163,7 +171,10 @@ struct DecryptionGameView: View {
                     }
                     .frame(width: 500, height: 130)
 
-                    Image("robot_zero").resizable().frame(width: 200, height: 200).padding(.leading, -20)
+                    Image("robot_zero")
+                        .resizable()
+                        .frame(width: 200, height: 200)
+                        .padding(.leading, -20)
                         .offset(x: animationOffset)
                         .onAppear {
                             withAnimation(.spring(response: 0.6, dampingFraction: 0.7, blendDuration: 0.5)) {
@@ -195,6 +206,7 @@ struct DecryptionGameView: View {
 
                         if result == selectedQuestion.correctAnswer {
                             showWinPopup = true
+                            
                             player.playerScore += 100
                             player.coins += 50
                             store?.currentLevel += 1
@@ -218,8 +230,15 @@ struct DecryptionGameView: View {
                     }
                     .padding().background(Color.c3.opacity(0.9)).foregroundColor(.white).cornerRadius(12)
                     .padding(.leading, 500)
+                    
+                   
                 }
                 .padding(.top, 150)
+                //
+                WinPopUp(winPopup: $showWinPopup, navigateToMap: $navigateToMap,navigateToMainMenu: $navigateToMainMenu)
+             
+                FailPopUp(failPopup: $showLosePopup, navigateToMainMenu: $navigateToMainMenu)
+
             }
             .alert("❌", isPresented: $showLosePopup) {
                 if player.attempts <= 0 {
@@ -248,16 +267,16 @@ struct DecryptionGameView: View {
                     }
                 }
             }
-            .alert("🎉 مبروك! فزت!", isPresented: $showWinPopup) {
-                Button("استمرار") {
-                    navigateToMap = true
-                }
-            } message: {
-                Text("لقد قمت بفك الشيفرة بشكل صحيح!")
-            }
+//            .alert("🎉 مبروك! فزت!", isPresented: $showWinPopup) {
+//                Button("استمرار") {
+//                    navigateToMap = true
+//                }
+//            } message: {
+//                Text("لقد قمت بفك الشيفرة بشكل صحيح!")
+//            }
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
-        }
+        
         .onAppear {
             let questions = QuestionBank.shared.questionsByLevel[currentLevel] ?? []
             if let question = questions.first {

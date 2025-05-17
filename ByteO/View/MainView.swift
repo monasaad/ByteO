@@ -7,7 +7,6 @@
 import SwiftUI
 import SwiftData
 import AVFoundation
-
 struct MainMenuView: View {
     @Environment(\.modelContext) private var context
     @Query var gameData: [GameDataStore]
@@ -27,7 +26,7 @@ struct MainMenuView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Image("bg")
                     .resizable()
@@ -61,7 +60,7 @@ struct MainMenuView: View {
                                     .background(.ultraThinMaterial)
                                     .clipShape(Circle())
                             }
-
+//
                             // 👜 الكوينز
                             HStack(spacing: 6) {
                                 Image(systemName: "wallet.pass.fill")
@@ -129,11 +128,17 @@ struct MainMenuView: View {
                 }
 
                 // الروابط
-                NavigationLink(destination: MapView(), isActive: $navigateToMap) { EmptyView() }.hidden()
-                NavigationLink(destination: IntroView(), isActive: $navigateToIntro) { EmptyView() }.hidden()
+                .navigationDestination(isPresented: $navigateToMap) {
+                    MapView() }
+                .navigationDestination(isPresented: $navigateToIntro) {
+                    IntroView() }
+
+                
+//                NavigationLink(destination: MapView(), isActive: $navigateToMap) { EmptyView() }.hidden()
+//                NavigationLink(destination: IntroView(), isActive: $navigateToIntro) { EmptyView() }.hidden()
             }
             .onAppear(perform: prepareSound)
-        }
+        }.navigationBarBackButtonHidden()
     }
 
     private func checkForReset() {
@@ -206,6 +211,7 @@ struct IntroView: View {
 
                 Button("start"){
                     navigateToGame = true
+                  
                 }
                 .padding()
                 .background(Color.c3)
@@ -215,11 +221,13 @@ struct IntroView: View {
             .padding()
         }
         .navigationBarHidden(true)
-        .background(
-            NavigationLink(destination: DecryptionGameView(levelID: 1), isActive: $navigateToGame) {
-                EmptyView()
-            }.hidden()
-        )
+        .navigationDestination(isPresented: $navigateToGame){
+        DecryptionGameView(levelID: 1)}
+//        .background(
+//            NavigationLink(destination: DecryptionGameView(levelID: 1), isActive: $navigateToGame) {
+//                EmptyView()
+//            }.hidden()
+//        )
     }
 }
 

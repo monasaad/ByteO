@@ -1,83 +1,61 @@
+//  FailPopUp.swift
+//  ByteO
+//  Created by Shatha Almukhaild on 18/11/1446 AH.
+
 import SwiftUI
 
-struct ioo: View {
-    @AppStorage("currentLevel") var currentLevel: Int = 0
-    @State private var showMap = false
-    @State private var showGame = false
-    @State private var showPopup = false // Show pop-up when credit card button is pressed
-    
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                // الأيقونات أعلى يسار الشاشة
-                VStack {
-                    HStack {
-                        Button(action: {
-                            showPopup.toggle() // Show the pop-up when the credit card button is pressed
-                        }) {
-                            Image(systemName: "creditcard.fill")
-                                .resizable()
-                                .frame(width: 30, height: 20)
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-                    }
-                    .padding([.leading, .top], 20)
 
-                    Spacer()
-                }
-                // Pop-up view when the credit card button is pressed
-                if showPopup {
+struct FailPopUp: View {
+    @AppStorage("currentLevel") var currentLevel: Int = 0
+    @State private var showRetryAlert = false
+
+    @Binding var failPopup: Bool // Show pop-up
+    @Binding var navigateToMainMenu: Bool
+    @State private var showExitPopup = false
+    var body: some View {
+    
+            if failPopup {
+                // Pop-up view when the user fail the mission
                     VStack {
                         Spacer()
 
                         VStack(spacing: 20) {
-                         
-
                             HStack(spacing: 70) {
                                 ZStack {
-                                    Image("background") // استبدل "background" باسم صورة الخلفية
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 300, height: 300)
-                                        .clipped()
-                                        .offset(y: -30)
-                                 
                                     VStack {
                                         HStack(spacing: 5) {
-                                            Image(systemName: "star.fill")
+                                            Image(systemName: "star")
                                                 .foregroundColor(.yellow)
                                                 .font(.system(size: 30))
                                                 .rotationEffect(.degrees(-30))
 
-                                            Image(systemName: "star.fill")
+                                            Image(systemName: "star")
                                                 .foregroundColor(.yellow)
                                                 .font(.system(size: 40))
                                                 .rotationEffect(.degrees(0))
                                                 .offset(y: -10)
 
-                                            Image(systemName: "star.fill")
+                                            Image(systemName: "star")
                                                 .foregroundColor(.yellow)
                                                 .font(.system(size: 30))
                                                 .rotationEffect(.degrees(30))
                                         }
                                        // .padding(.bottom,15)
+                                        Spacer()
                                         ZStack{
-                                            Image("piato")
+                                            Image("cat_avatar")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .frame(width: 200, height: 200)
+                                                .frame(width: 150, height: 150)
                                                 .frame(width: 500)
                                                 .offset(y: -30)
 
-                                            Image("image4")
+                                            Image("YellowBanner")
                                                 .resizable()
                                                 .frame(width: 180, height: 40)
                                                 .offset(y: 50)
                                             
-                                            Text("Congratulations") // النص الذي سيظهر فوق الصورة
+                                            Text("Failed") // النص الذي سيظهر فوق الصورة
                                                 .font(.headline)
                                                 .foregroundColor(.white)
                                                 .padding()
@@ -85,12 +63,14 @@ struct ioo: View {
                                                 //.cornerRadius(10)
                                                 .offset(y: 45) // تحريك النص فوق الصورة
                                         }
+                                        Spacer()
                                         HStack{
                                             Button(action: {
-                                                // Handle purchase
+                                                showExitPopup = true
+
                                             }) {
                                                 HStack(spacing: 5) {
-                                                    Image("riyal")
+                                                    Image("exit")
                                                         .resizable()
                                                         .frame(width: 20, height: 20)
                                                 }
@@ -103,14 +83,18 @@ struct ioo: View {
                                                 )
                                                 .shadow(color: .white.opacity(0.9), radius: 10, x: 2, y: 2)
                                                 .offset(y: -30)
+                                            }.alert("هل تريد الخروج من اللعبة؟", isPresented: $showExitPopup) {
+                                                Button("نعم", role: .destructive) { navigateToMainMenu = true }
+                                                Button("إلغاء", role: .cancel) {}
                                             }
                                             Button(action: {
                                                 // Handle purchase
+                                                
                                             }) {
                                                 HStack(spacing: 5) {
-                                                    Image("riyal")
+                                                    Image("Replay")
                                                         .resizable()
-                                                        .frame(width: 20, height: 20)
+                                                        .frame(width: 20, height: 23)
                                                 }
                                                 .frame(width: 60, height: 50)
                                                 .background(Color.black.opacity(0.4))
@@ -143,16 +127,16 @@ struct ioo: View {
                         .padding()
                     }
                     .transition(.move(edge: .bottom))
-                }
+                
 
             }
-            .navigationBarHidden(true)
+   
         }
     }
-}
 
-struct ioo_Previews: PreviewProvider {
+
+struct FailPopUp_Previews: PreviewProvider {
     static var previews: some View {
-        ioo()
+        FailPopUp(failPopup:.constant(true) ,navigateToMainMenu: .constant(false))
     }
 }
