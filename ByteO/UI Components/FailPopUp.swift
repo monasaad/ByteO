@@ -3,11 +3,16 @@
 //  Created by Shatha Almukhaild on 18/11/1446 AH.
 
 import SwiftUI
+import SwiftData
 
 
 struct FailPopUp: View {
+
+
+    @Environment(\.modelContext) private var context
+    @Bindable var player: Player
     @AppStorage("currentLevel") var currentLevel: Int = 0
-    @State private var showRetryAlert = false
+    @State private var showPurchaseAlert = false
 
     @Binding var failPopup: Bool // Show pop-up
     @Binding var navigateToMainMenu: Bool
@@ -88,9 +93,15 @@ struct FailPopUp: View {
                                                 Button("إلغاء", role: .cancel) {}
                                             }
                                             Button(action: {
-                                                // Handle purchase
-                                                
-                                            }) {
+                                                //محاولات متبقية ؟ اغلاق نافذة الخساره وإكمال اللعب
+                                                if player.attempts > 0 {
+                                                    //Dismiss the pop-up
+                                                    failPopup=false
+                                                }
+                                                // خلصت المحاولات ؟ انتظر ٢٤ ساعة او اشتر محاولات
+                                                else {
+                                                    showPurchaseAlert = true
+                                                }}) {
                                                 HStack(spacing: 5) {
                                                     Image("Replay")
                                                         .resizable()
@@ -105,7 +116,34 @@ struct FailPopUp: View {
                                                 )
                                                 .shadow(color: .white.opacity(0.9), radius: 10, x: 2, y: 2)
                                                 .offset(y: -30)
+                                            }.alert("❌", isPresented: $showPurchaseAlert) {
+                                                if player.attempts <= 0 {
+                                                    Button("Buy an Attempt for 50 coins") {
+                                                        if player.coins >= 50 {
+                                                            player.coins -= 50
+                                                            player.attempts = 1
+                                                            player.lastAttemptsReset = Date()
+                                                        }
+                                                        try? context.save()
+                                                        // Dissmiss the popup
+                                                        failPopup = false
+                                                    }
+                                                    Button("Wait for 24 hours", role: .cancel) {
+                                                        navigateToMainMenu = true
+                                                    }
+                                                }
+                                            } message: {
+                                                VStack(spacing: 12) {
+                                                    Text(player.attempts <= 0 ? "Incorrect Answer !": "You run out of attempts!")
+                                                    HStack {
+                                                        ForEach(0..<3, id: \ .self) { i in
+                                                            Image(systemName: i < player.attempts ? "pawprint.fill" : "pawprint")
+                                                                .foregroundColor(i < player.attempts ? .white : .gray)
+                                                        }
+                                                    }
+                                                }
                                             }
+
                                         }
 
                                     }
@@ -135,8 +173,8 @@ struct FailPopUp: View {
     }
 
 
-struct FailPopUp_Previews: PreviewProvider {
-    static var previews: some View {
-        FailPopUp(failPopup:.constant(true) ,navigateToMainMenu: .constant(false))
-    }
-}
+//struct FailPopUp_Previews: PreviewProvider {
+//    static var previews: some View {
+//        FailPopUp(player: player, failPopup:.constant(true) ,navigateToMainMenu: .constant(false))
+//    }
+//}

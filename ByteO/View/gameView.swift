@@ -51,7 +51,7 @@ struct DecryptionGameView: View {
     let levelID: Int // ← المستوى الحالي
 
     @Environment(\.modelContext) private var context
-    @Query var players: [Player]
+ //   @Query var players: [Player]
     @Query var gameData: [GameDataStore]
 
     @State private var selectedQuestion: Question = QuestionBank.shared.questionsByLevel[1]![0]
@@ -66,12 +66,13 @@ struct DecryptionGameView: View {
     @State private var navigateToMap = false
     @State private var showHintPopup = false
 
-    var player: Player {
-        players.first ?? Player()
+    private var store: GameDataStore {
+      // if you bootstrap in MainMenuView, this will never be nil at runtime
+      gameData.first!
     }
 
-    var store: GameDataStore? {
-        gameData.first
+    private var player: Player {
+      store.player
     }
 
     var currentLevel: Int { levelID }
@@ -202,31 +203,34 @@ struct DecryptionGameView: View {
                     }
 
                     Button("Submit") {
-                        let result = slots.joined()
+                      let result = slots.joined()
 
-                        if result == selectedQuestion.correctAnswer {
-                            showWinPopup = true
-                            
-                            player.playerScore += 100
-                            player.coins += 50
-                            store?.currentLevel += 1
-                            if let level = store?.levels.first(where: { $0.id == currentLevel }) {
-                                level.isCompleted = true
-                            }
-                        } else {
-                            // التحقق من إعادة التعبئة إذا مضت 24 ساعة
-                            if let last = player.lastAttemptsReset {
-                                let hoursPassed = Calendar.current.dateComponents([.hour], from: last, to: Date()).hour ?? 0
-                                if hoursPassed >= 24 {
-                                    player.attempts = 3
-                                    player.lastAttemptsReset = Date()
-                                }
-                            }
-                            player.attempts = max(player.attempts - 1, 0)
-                            showLosePopup = true
+                      if result == selectedQuestion.correctAnswer {
+                        showWinPopup = true
+                        player.playerScore += 100
+                        player.coins       += 50
+                        store.currentLevel += 1
+                        if let lvl = store.levels.first(where: { $0.id == currentLevel }) {
+                          lvl.isCompleted = true
+                        }
+                      } else {
+                        // refill after 24h if needed
+                        if let last = player.lastAttemptsReset,
+                           Calendar.current.dateComponents([.hour],
+                             from: last, to: Date()).hour! >= 24 {
+                          player.attempts = 3
+                          player.lastAttemptsReset = Date()
+                        } else if player.lastAttemptsReset == nil {
+                          player.lastAttemptsReset = Date()
                         }
 
+                        // **this now really mutates the persisted Player**
+                        player.attempts = max(player.attempts - 1, 0)
                         try? context.save()
+                        showLosePopup = true
+                      }
+
+                      try? context.save()
                     }
                     .padding().background(Color.c3.opacity(0.9)).foregroundColor(.white).cornerRadius(12)
                     .padding(.leading, 500)
@@ -237,36 +241,36 @@ struct DecryptionGameView: View {
                 //
                 WinPopUp(winPopup: $showWinPopup, navigateToMap: $navigateToMap,navigateToMainMenu: $navigateToMainMenu)
              
-                FailPopUp(failPopup: $showLosePopup, navigateToMainMenu: $navigateToMainMenu)
+                FailPopUp(player: player, failPopup: $showLosePopup, navigateToMainMenu: $navigateToMainMenu)
 
             }
-            .alert("❌", isPresented: $showLosePopup) {
-                if player.attempts <= 0 {
-                    Button("شراء محاولات بـ 50 كوين") {
-                        if player.coins >= 50 {
-                            player.coins -= 50
-                            player.attempts = 3
-                            player.lastAttemptsReset = Date()
-                        }
-                        try? context.save()
-                    }
-                    Button("انتظار 24 ساعة", role: .cancel) {
-                        navigateToMainMenu = true
-                    }
-                } else {
-                    Button("محاولة أخرى", role: .cancel) {}
-                }
-            } message: {
-                VStack(spacing: 12) {
-                    Text(player.attempts <= 0 ? "انتهت محاولاتك!" : "إجابتك خاطئة!")
-                    HStack {
-                        ForEach(0..<3, id: \ .self) { i in
-                            Image(systemName: i < player.attempts ? "pawprint.fill" : "pawprint")
-                                .foregroundColor(i < player.attempts ? .white : .gray)
-                        }
-                    }
-                }
-            }
+//            .alert("❌", isPresented: $showLosePopup) {
+//                if player.attempts <= 0 {
+//                    Button("شراء محاولات بـ 50 كوين") {
+//                        if player.coins >= 50 {
+//                            player.coins -= 50
+//                            player.attempts = 3
+//                            player.lastAttemptsReset = Date()
+//                        }
+//                        try? context.save()
+//                    }
+//                    Button("انتظار 24 ساعة", role: .cancel) {
+//                        navigateToMainMenu = true
+//                    }
+//                } else {
+//                    Button("محاولة أخرى", role: .cancel) {}
+//                }
+//            } message: {
+//                VStack(spacing: 12) {
+//                    Text(player.attempts <= 0 ? "انتهت محاولاتك!" : "إجابتك خاطئة!")
+//                    HStack {
+//                        ForEach(0..<3, id: \ .self) { i in
+//                            Image(systemName: i < player.attempts ? "pawprint.fill" : "pawprint")
+//                                .foregroundColor(i < player.attempts ? .white : .gray)
+//                        }
+//                    }
+//                }
+//            }
 //            .alert("🎉 مبروك! فزت!", isPresented: $showWinPopup) {
 //                Button("استمرار") {
 //                    navigateToMap = true

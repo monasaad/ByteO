@@ -23,6 +23,7 @@ struct ByteOApp: App {
             GameDataStore.self
           ]
         )
+        
     }
   }
 }
