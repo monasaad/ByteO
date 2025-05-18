@@ -1,4 +1,5 @@
 
+
 import SwiftUI
 import SwiftData
 
@@ -8,7 +9,7 @@ struct MapView: View {
     @State private var selectedLevel: Int?
 
     var body: some View {
-        NavigationStack {
+      
             if let store = stores.first {
                 List {
                     ForEach(store.levels) { level in
@@ -48,8 +49,7 @@ struct MapView: View {
             }
         }
     }
-}
+
 #Preview {
     MapView()
 }
-

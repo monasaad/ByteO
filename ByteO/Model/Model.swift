@@ -1,10 +1,11 @@
+//////
+//////  Model.swift
+//////  testgame
+//////
+//////  Created by atheer alshareef on 15/05/2025.
+//////
 ////
-////  Model.swift
-////  testgame
-////
-////  Created by atheer alshareef on 15/05/2025.
-////
-//
+
 import Foundation
 import SwiftData
 import CoreGraphics
@@ -55,6 +56,7 @@ class Player {
 class Level: Identifiable {
   var id: Int
   //let levelNumber: Int
+    
   var isCompleted: Bool
   //  var questions: [Question]
   init(id: Int, isCompleted: Bool = false) //, questions: [Question]

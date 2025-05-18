@@ -1,35 +1,17 @@
 import SwiftUI
 
-struct ioo: View {
+struct WinPopUp: View {
     @AppStorage("currentLevel") var currentLevel: Int = 0
-    @State private var showMap = false
-    @State private var showGame = false
-    @State private var showPopup = false // Show pop-up when credit card button is pressed
-    
-    var body: some View {
-        NavigationStack {
-            ZStack {
-                // الأيقونات أعلى يسار الشاشة
-                VStack {
-                    HStack {
-                        Button(action: {
-                            showPopup.toggle() // Show the pop-up when the credit card button is pressed
-                        }) {
-                            Image(systemName: "creditcard.fill")
-                                .resizable()
-                                .frame(width: 30, height: 20)
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                        }
-                    }
-                    .padding([.leading, .top], 20)
 
-                    Spacer()
-                }
-                // Pop-up view when the credit card button is pressed
-                if showPopup {
+    @Binding var winPopup: Bool
+    @Binding var navigateToMap: Bool
+    @Binding var navigateToMainMenu: Bool
+    @State private var showExitPopup = false
+
+
+    var body: some View {
+                // Pop-up view when the user pass the mission 
+                if winPopup {
                     VStack {
                         Spacer()
 
@@ -64,15 +46,16 @@ struct ioo: View {
                                                 .rotationEffect(.degrees(30))
                                         }
                                        // .padding(.bottom,15)
+                                        Spacer()
                                         ZStack{
-                                            Image("piato")
+                                            Image("cat_avatar")
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .frame(width: 200, height: 200)
+                                                .frame(width: 150, height: 150)
                                                 .frame(width: 500)
                                                 .offset(y: -30)
 
-                                            Image("image4")
+                                            Image("YellowBanner")
                                                 .resizable()
                                                 .frame(width: 180, height: 40)
                                                 .offset(y: 50)
@@ -85,12 +68,15 @@ struct ioo: View {
                                                 //.cornerRadius(10)
                                                 .offset(y: 45) // تحريك النص فوق الصورة
                                         }
+                                        Spacer()
                                         HStack{
                                             Button(action: {
-                                                // Handle purchase
+                                                showExitPopup = true
+                                                  
                                             }) {
+                                                
                                                 HStack(spacing: 5) {
-                                                    Image("riyal")
+                                                    Image("exit")
                                                         .resizable()
                                                         .frame(width: 20, height: 20)
                                                 }
@@ -103,12 +89,20 @@ struct ioo: View {
                                                 )
                                                 .shadow(color: .white.opacity(0.9), radius: 10, x: 2, y: 2)
                                                 .offset(y: -30)
+                                            }.alert("هل تريد الخروج من اللعبة؟", isPresented: $showExitPopup) {
+                                                Button("نعم", role: .destructive) { navigateToMainMenu = true }
+                                                Button("إلغاء", role: .cancel) {}
                                             }
                                             Button(action: {
-                                                // Handle purchase
+                                            // close Win pop-up
+                                                winPopup = false
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                                                    //navigate to map 
+                                                  navigateToMap = true
+                                                }
                                             }) {
                                                 HStack(spacing: 5) {
-                                                    Image("riyal")
+                                                    Image("fast-forward")
                                                         .resizable()
                                                         .frame(width: 20, height: 20)
                                                 }
@@ -132,11 +126,12 @@ struct ioo: View {
                             .shadow(radius: 10)
                         }
                         .frame(width: 350, height: 350)
+                        .background(.ultraThinMaterial)
                         .background(
                             ZStack {
                                 Color.black.opacity(0.5)
                                     .cornerRadius(20)
-                                .background(.ultraThinMaterial)
+                                
                             }
                         )
                         .cornerRadius(20)
@@ -145,14 +140,14 @@ struct ioo: View {
                     .transition(.move(edge: .bottom))
                 }
 
-            }
-            .navigationBarHidden(true)
+        
+    
         }
     }
-}
 
-struct ioo_Previews: PreviewProvider {
-    static var previews: some View {
-        ioo()
-    }
-}
+
+//struct WinPopUp_Previews: PreviewProvider {
+//    static var previews: some View {
+//        WinPopUp(winPopup:.constant(true), navigateToMap:.constant(false), navigateToMainMenu: .constant(false))
+//    }
+//}

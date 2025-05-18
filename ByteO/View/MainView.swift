@@ -7,7 +7,6 @@
 import SwiftUI
 import SwiftData
 import AVFoundation
-
 struct MainMenuView: View {
     @Environment(\.modelContext) private var context
     @Query var gameData: [GameDataStore]
@@ -15,9 +14,9 @@ struct MainMenuView: View {
     @State private var navigateToMap = false
     @State private var navigateToIntro = false
     @State private var showAchievements = false
-
     @State private var playerAudio: AVAudioPlayer?
-
+    @State private var isMuted: Bool = false
+    
     var player: Player? {
         gameData.first?.player
     }
@@ -27,124 +26,126 @@ struct MainMenuView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
-                Image("bg")
+                Image("bg2")
                     .resizable()
-                    .scaledToFill()
+                    //.scaledToFill()
                     .edgesIgnoringSafeArea(.all)
-                
+
                 VStack {
-                    HStack(alignment: .top) {
-                        VStack() {
-                            // ⚙️ الإعدادات / صفحة الإنجازات
-                            Button(action: {
-                                showAchievements = true
-                            }) {
-                                Image(systemName: "gearshape")
-                                // .resizable()
-                                    .frame(width: 40, height: 20)
-                                    .padding(10)
-                                    .background(.ultraThinMaterial)
-                                    .foregroundColor(.white)
-                                    .clipShape(Circle())
-                            }
-                            .sheet(isPresented: $showAchievements) {
-                            }
-                            .padding(.bottom, 1)
-                            // 🔇 زر الصوت
-                            Button(action: toggleSound) {
-                                Image(systemName: settings?.soundMuted == true ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                                    .frame(width: 40, height: 20)
-                                    .padding(10)
-                                    .background(.ultraThinMaterial)
-                                    .foregroundColor(.white)
-                                    .clipShape(Circle())
-                            }
-                            
-                            // 👜 الكوينز
-                            HStack(spacing: 6) {
-                                Image(systemName: "creditcard.fill")
-                                    .frame(width: 40, height: 20)
-                                    .padding(10)
-                                    .background(.ultraThinMaterial)
-                                    .foregroundColor(.white)
-                                    .clipShape(Circle())
-                                
-                                Text("\(player?.coins ?? 0)")
-                                    .foregroundColor(.white)
-                                
-                            }
+                    //  VStack(alignment: .leading, spacing: 12) {
+                    // ⚙️ الإعدادات / صفحة الإنجازات
+                    Button(action: {
+                        showAchievements = true
+                    }) {
+                        Image(systemName: "trophy")
                             .frame(width: 40, height: 20)
                             .padding(10)
-                            //.background(.ultraThinMaterial)
+                            .background(.ultraThinMaterial)
                             .foregroundColor(.white)
-                            // .clipShape(Circle())
-                        }
-                        .padding(.leading, -20)
-                        .padding(.bottom, -140)
-                        Spacer()
+                            .clipShape(Circle())
+                            .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
+                        
+                    }
+                    .sheet(isPresented: $showAchievements) {
                     }
                     
-                    
-                    
-                    VStack(){
-                     Spacer()
-                    // 🐱 صورة القطة
-                    Image("cat_avatar")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 300)
-
-                    // أزرار اللعب والخريطة
-                        VStack() {
-                            
-                            Button("Play") {
-                                if gameData.isEmpty {
-                                    let levels = (1...10).map { Level(id: $0) }
-                                    let player = Player()
-                                    let settings = Settings()
-                                    let store = GameDataStore(player: player, settings: settings, levels: levels)
-                                    
-                                    context.insert(store)
-                                    try? context.save()
-                                    
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                        navigateToIntro = true
-                                    }
-                                } else if let seen = gameData.first?.settings.hasSeenIntro, !seen {
-                                    gameData.first?.settings.hasSeenIntro = true
-                                    try? context.save()
-                                    navigateToIntro = true
-                                } else {
-                                    checkForReset()
-                                    navigateToMap = true
-                                }
-                            }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(.c3)
-                            .cornerRadius(10)
-                            .shadow(radius: 5)
-                          //  .frame(width: 900, height: 50)
-                            Button("Map") {
-                                checkForReset()
-                                navigateToMap = true
-                            }
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
+                    // 🔇 زر الصوت
+                    Button(action: toggleSound) {
+                        Image(systemName: settings?.soundMuted == true ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                            .scaledToFit()
+                            .frame(width: 40, height: 20)
+                            .padding(10)
                             .background(.ultraThinMaterial)
-                            .cornerRadius(10)
-                        }
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                            .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
+                    }
+                    
+                    // 👜 الكوينز
+                    HStack(spacing: 1) {
+                        Image(systemName: "wallet.pass.fill")
+                            .frame(width: 40, height: 20)
+                            .padding(10)
+                            .background(.ultraThinMaterial)
+                            .foregroundColor(.white)
+                            .clipShape(Circle())
+                        
+                        Text("\(player?.coins ?? 0)")
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 40, height: 20)
+                    .padding(10)
+                    //.background(.ultraThinMaterial)
+                    .foregroundColor(.white)
+                    //.clipShape(Circle())
+                    .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
                 }
-            }
+                .padding(.leading, -400)
+                .padding(.bottom, 210)
+                
+                 VStack{
+                     
+                    // أزرار اللعب والخريطة
+                     Button("Play") {
+                         if gameData.isEmpty {
+                             let levels = (1...10).map { Level(id: $0) }
+                             let player = Player()
+                             let settings = Settings()
+                             let store = GameDataStore(player: player, settings: settings, levels: levels)
+
+                             context.insert(store)
+                             try? context.save()
+
+                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                                 navigateToIntro = true
+                             }
+                         } else if let seen = gameData.first?.settings.hasSeenIntro, !seen {
+                             gameData.first?.settings.hasSeenIntro = true
+                             try? context.save()
+                             navigateToIntro = true
+                         } else {
+                             checkForReset()
+                             navigateToMap = true
+                         }
+                     }
+                     .font(.system(size: 25, weight: .bold))
+                     .foregroundColor(.white)
+                     .frame(width: 95, height: 40) // ← الطول والعرض
+                     .background(Color.c4)      // ← لون الخلفية
+                     .cornerRadius(30)              // ← الزوايا الدائرية
+                     .shadow(color: .c4.opacity(0.4), radius: 8, x: 0, y: 5)
+                     
+                  
+                        Button("Map") {
+                            checkForReset()
+                            navigateToMap = true
+                        }
+                        .font(.system(size: 25, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 95, height: 40)
+                        .background(.ultraThinMaterial)
+                        .cornerRadius(30)
+                        .shadow(color: .c4.opacity(0.4), radius: 8, x: 0, y: 5)
+                    
+                     }
+                        .padding(.leading, 100)
+                        .padding(.top, 250)
+                
                 // الروابط
-                NavigationLink(destination: MapView(), isActive: $navigateToMap) { EmptyView() }.hidden()
-                NavigationLink(destination: IntroView(), isActive: $navigateToIntro) { EmptyView() }.hidden()
+                .navigationDestination(isPresented: $navigateToMap) {
+                    MapView() }
+                .navigationDestination(isPresented: $navigateToIntro) {
+                    IntroView() }
             }
-            .onAppear(perform: prepareSound)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+
+            .onAppear {
+                isMuted = settings?.soundMuted ?? false
+                prepareSound()
+            }
         }
     }
 
@@ -160,28 +161,34 @@ struct MainMenuView: View {
             }
         }
     }
-
     private func prepareSound() {
-        guard let url = Bundle.main.url(forResource: "menu_music", withExtension: "mp3") else { return }
-        do {
-            playerAudio = try AVAudioPlayer(contentsOf: url)
-            playerAudio?.numberOfLoops = -1
-            if settings?.soundMuted == false {
-                playerAudio?.play()
-            }
-        } catch {
-            print("⚠️ فشل تشغيل الصوت: \(error.localizedDescription)")
-        }
-    }
+          guard let url = Bundle.main.url(forResource: "CipherintheMetro", withExtension: "mp3") else {
+              print("⚠️ الملف غير موجود!")
+              return
+          }
 
+          do {
+              playerAudio = try AVAudioPlayer(contentsOf: url)
+              playerAudio?.numberOfLoops = -1
+              if !isMuted {
+                  playerAudio?.play()
+              }
+          } catch {
+              print("⚠️ فشل تشغيل الصوت: \(error.localizedDescription)")
+          }
+      }
+    
     private func toggleSound() {
         guard let settings = settings else { return }
-        settings.soundMuted.toggle()
-        if settings.soundMuted {
+        isMuted.toggle()
+        settings.soundMuted = isMuted
+        
+        if isMuted {
             playerAudio?.pause()
         } else {
             playerAudio?.play()
         }
+        
         try? context.save()
     }
 }
@@ -191,13 +198,13 @@ struct MainMenuView: View {
 }
 
 
-// 
+//
 struct IntroView: View {
     @State private var navigateToGame = false
 
     var body: some View {
         ZStack {
-            Image("bg")
+            Image("bg2")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
 
@@ -218,6 +225,7 @@ struct IntroView: View {
 
                 Button("start"){
                     navigateToGame = true
+                  
                 }
                 .padding()
                 .background(Color.c3)
@@ -227,12 +235,13 @@ struct IntroView: View {
             .padding()
         }
         .navigationBarHidden(true)
-        .background(
-            NavigationLink(destination: DecryptionGameView(levelID: 1), isActive: $navigateToGame) {
-                EmptyView()
-            }.hidden()
-        )
+        .navigationDestination(isPresented: $navigateToGame){
+        DecryptionGameView(levelID: 1)}
+//        .background(
+//            NavigationLink(destination: DecryptionGameView(levelID: 1), isActive: $navigateToGame) {
+//                EmptyView()
+//            }.hidden()
+//        )
     }
 }
-
 
