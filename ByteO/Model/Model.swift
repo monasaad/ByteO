@@ -56,16 +56,16 @@ struct LevelData {
                 StaticLevel(
                     number: 1,
                     question: "King Abdullah Financial District",
-                    encryptedText: "See you at Roddb \nThe Key : - 3",
+                    encryptedText: "See you at Rodbd \nThe Key : - 3",
                     correctAnswer: "OLAYA", //Olaya
-                    hint: "Each letter moved back 3 steps in the alphabet.Think of a famous me"
+                    hint: "Each letter moved back 3 steps in the alphabet. Think of a famous me"
                 ),
                 StaticLevel(
                     number: 2,
                     question: "Decode the message at GrUze Staion \nThe Key : - 6",
                     encryptedText: "GrUze",
                     correctAnswer: "AlOud",
-                    hint: "Where heritage meets the tracks!This station carries the scent of history "
+                    hint: "Where heritage meets the tracks! This station carries the scent of history"
                     
                 ),
                 StaticLevel(

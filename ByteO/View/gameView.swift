@@ -87,6 +87,32 @@ struct GameView: View {
         
         
         ZStack {
+            //TODO
+            if showAdPrompt {
+                CustomAlertView(
+                    title: "Hint",
+                    message: "\(level.hint)",
+                    
+                    // if hints is used, change watch ad to Watch Ad
+                    primaryButtonTitle: "Got it!",
+                    secondaryButtonTitle: "Cancel",
+                    
+                    
+                    primaryAction: {
+                        // Handle ad watching logic
+                        print("Start playing ad...")
+                        showAdPrompt = false
+                    },
+                    secondaryAction: {
+                        showAdPrompt = false
+                    }
+                )
+                .transition(.scale.combined(with: .opacity))
+                .zIndex(999)  // Ensure it's on top
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color.black.opacity(0.4))
+            }
+            
             NavigationLink("", destination: MainMenuView(), isActive: $navigateToMainMenu).hidden()
             NavigationLink("", destination: MapView(), isActive: $navigateToMap).hidden()
 
@@ -146,11 +172,13 @@ struct GameView: View {
             VStack{
                 HStack(alignment: .top, spacing: -15) {
                     ZStack {
+                       
+
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.ultraThinMaterial)
                             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c2.opacity(0.8), lineWidth: 1.8))
                             .shadow(color: .c2.opacity(0.5), radius: 8, x: 0, y: 5)
-                        
+
                         VStack(alignment: .leading, spacing: 5) {
                             Text("\(track.name) - Level \(level.number)")
                                 .font(.system(size: 18, weight: .bold, design: .monospaced))
@@ -159,16 +187,16 @@ struct GameView: View {
                             Text("\(level.question)")
                                 .font(.system(size: 18, weight: .bold, design: .monospaced))
                                 .foregroundColor(.white.opacity(0.9))
-                                .multilineTextAlignment(.leading) // النص يبدأ من اليسار
-                                .lineLimit(nil) // عدد غير محدود من الأسطر
-                                .fixedSize(horizontal: false, vertical: true) // التفاف تلقائي
+                                .multilineTextAlignment(.leading)  // النص يبدأ من اليسار
+                                .lineLimit(nil)  // عدد غير محدود من الأسطر
+                                .fixedSize(horizontal: false, vertical: true)  // التفاف تلقائي
                                 .frame(maxWidth: .infinity, alignment: .leading)
                             Text("Encrypted messages: \(level.encryptedText)")
                                 .font(.system(size: 16, design: .monospaced))
                                 .foregroundColor(.white.opacity(0.9))
-                                .multilineTextAlignment(.leading) // النص يبدأ من اليسار
-                                .lineLimit(nil) // عدد غير محدود من الأسطر
-                                .fixedSize(horizontal: false, vertical: true) // التفاف تلقائي
+                                .multilineTextAlignment(.leading)  // النص يبدأ من اليسار
+                                .lineLimit(nil)  // عدد غير محدود من الأسطر
+                                .fixedSize(horizontal: false, vertical: true)  // التفاف تلقائي
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .padding(.bottom, 20)
@@ -180,7 +208,33 @@ struct GameView: View {
                             }
                         }
                         .frame(width: 500, height: 100)
-                        
+
+                        //TODO
+                        //                        Button(action: {
+                        //                            if !usedHint && !(progress?.hintsUsed.contains(levelKey) ?? false) {
+                        //                                usedHint = gameData.useHint(for: levelKey)
+                        //                                showHint = true
+                        //                            } else {
+                        //                                showAdPrompt = true
+                        //                            }
+                        //                        }) {
+                        //                            ZStack {
+                        //                                Circle().fill(Color.c2.opacity(0.99)).frame(width: 50, height: 50)
+                        //                                Image(systemName: "lightbulb.fill")
+                        //                                    .font(.title)
+                        //                                    .frame(width: 50, height: 50)
+                        //                                    .foregroundColor(.white)
+                        //                            }
+                        //                        }
+                        //                        .alert("Alert", isPresented: $showAdPrompt) {
+                        //                            Button("OK") {}
+                        //                        } message: {
+                        //                            Text("To unlock another hint, you need to watch an Ad")
+                        //                        }
+                        //                        .padding(.leading, -320)
+                        //                        .padding(.bottom, 70)
+                        //                        .transition(.move(edge: .bottom))
+                        //                        .animation(.spring(response: 0.5, dampingFraction: 0.7), value: showHintPopup)
                         Button(action: {
                             if !usedHint && !(progress?.hintsUsed.contains(levelKey) ?? false) {
                                 usedHint = gameData.useHint(for: levelKey)
@@ -197,19 +251,17 @@ struct GameView: View {
                                     .foregroundColor(.white)
                             }
                         }
-                        .alert("Alert", isPresented: $showAdPrompt) {
-                            Button("OK") {}
-                        } message: {
-                            Text("To unlock another hint, you need to watch an Ad")
-                        }
+                        // REMOVE THE OVERLAY FROM HERE
                         .padding(.leading, -320)
                         .padding(.bottom, 70)
                         .transition(.move(edge: .bottom))
                         .animation(.spring(response: 0.5, dampingFraction: 0.7), value: showHintPopup)
+
+
                     }
-                    
+
                     .frame(width: 450, height: 130)
-                    
+
                     Image("robot_zero")
                         .resizable()
                         .frame(width: 160, height: 160)
