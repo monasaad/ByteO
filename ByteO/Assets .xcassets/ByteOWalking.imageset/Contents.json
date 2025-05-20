@@ -1,16 +1,16 @@
 {
   "images" : [
     {
-      "filename" : "artwork.png",
-      "idiom" : "iphone",
+      "filename" : "20250514_1600_Cat with Backpack_remix_01jv7e1je0fbrvj08z39wqqqy0.png",
+      "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
+      "idiom" : "universal",
       "scale" : "3x"
     }
   ],
