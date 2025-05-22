@@ -52,7 +52,7 @@ struct TutorialView: View {
     let pages: [TutorialPage] = [
         TutorialPage(
             title: "How to play",
-            content: "Symmetric Encryption\nIt’s a way we hide information. \nWe turn normal words into strange symbols,and bring them back using the same key!\n\nOne Key \nis used to encrypt and decrypt!"
+            content: "Symmetric Encryption\n\nIt’s a way we hide information, we turn normal words into strange symbols, and bring them back using the same key!\n\nOne key is used to encrypt and decrypt!"
         ),
         TutorialPage(
             title: "How to play",

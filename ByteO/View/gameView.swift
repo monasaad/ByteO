@@ -1,5 +1,5 @@
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct InfiniteLetterPicker: View {
     private let letters = Array("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
@@ -44,7 +44,7 @@ struct InfiniteLetterPicker: View {
 struct GameView: View {
     @Environment(GameDataStore.self) var gameData
     @Environment(\.dismiss) var dismiss
-    
+
     @State private var slots: [String] = ["A", "A", "A", "A", "A"]
     @State private var showHint = false
     @State private var usedHint = false
@@ -53,19 +53,19 @@ struct GameView: View {
     @State private var navigateToMap = false
     @State private var resetTimer: Timer?
     @State private var resetTimeText: String = ""
-    
+
     @State private var showWalletPopup = false
     @State private var showAttemptsPopup = false
     @State private var showExitPopup = false
     @State private var animationOffset: CGFloat = -500
     @State private var navigateToMainMenu = false
-    @State private var showHintPopup = false
+    @State private var showHintPopup = true
     @State private var showAdPrompt = false
-    
+
     @State private var showWinPopup = false
     @State private var showFailPopup = false
     @State private var showStoreSheet = false
-    
+
     var body: some View {
         let progress = gameData.playerProgress
         let tracks = LevelData.allTracks
@@ -82,22 +82,18 @@ struct GameView: View {
 
         let attemptsUsed = progress?.failedAttempts[levelKey] ?? 0
         let remaining = max(3 - attemptsUsed, 0)
-       
-        
-        
-        
+
         ZStack {
             //TODO
             if showAdPrompt {
                 CustomAlertView(
                     title: "Hint",
                     message: "\(level.hint)",
-                    
+
                     // if hints is used, change watch ad to Watch Ad
                     primaryButtonTitle: "Got it!",
                     secondaryButtonTitle: "Cancel",
-                    
-                    
+
                     primaryAction: {
                         // Handle ad watching logic
                         print("Start playing ad...")
@@ -112,7 +108,7 @@ struct GameView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background(Color.black.opacity(0.4))
             }
-            
+
             NavigationLink("", destination: MainMenuView(), isActive: $navigateToMainMenu).hidden()
             NavigationLink("", destination: MapView(), isActive: $navigateToMap).hidden()
 
@@ -135,44 +131,43 @@ struct GameView: View {
                     Button("Yes", role: .destructive) { navigateToMainMenu = true }
                     Button("Cancel", role: .cancel) {}
                 }
-                
-                Button(action: { showWalletPopup = true }) {
-                    HStack {
-                        Image(systemName: "wallet.bifold.fill")
-                            .foregroundColor(.white)
-                        Text(" \(progress?.coins ?? 0)")
-                            .foregroundColor(.white)
-                            .font(.headline)
-                    }
-                    .padding(8)
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(12)
-                }
-                .alert("Your current balance is: \(progress?.coins ?? 0) coins", isPresented: $showWalletPopup) {
-                    Button("OK", role: .cancel) {}
-                }
-                
-                Button(action: { showAttemptsPopup = true }) {
-                    HStack {
-                        Image(systemName: "pawprint.fill")
-                            .foregroundColor(.white)
-                        Text(" \(remaining)x ").foregroundColor(.white).font(.headline)
-                    }
-                    .padding(8)
-                    .background(Color.white.opacity(0.4))
-                    .cornerRadius(12)
-                }
-                .alert("You have \(remaining) attempts", isPresented: $showAttemptsPopup) {
-                    Button("OK", role: .cancel) {}
-                }
+
+                //                Button(action: { showWalletPopup = true }) {
+                //                    HStack {
+                //                        Image(systemName: "wallet.bifold.fill")
+                //                            .foregroundColor(.white)
+                //                        Text(" \(progress?.coins ?? 0)")
+                //                            .foregroundColor(.white)
+                //                            .font(.headline)
+                //                    }
+                //                    .padding(8)
+                //                    .background(Color.white.opacity(0.4))
+                //                    .cornerRadius(12)
+                //                }
+                //                .alert("Your current balance is: \(progress?.coins ?? 0) coins", isPresented: $showWalletPopup) {
+                //                    Button("OK", role: .cancel) {}
+                //                }
+
+                //                Button(action: { showAttemptsPopup = true }) {
+                //                    HStack {
+                //                        Image(systemName: "pawprint.fill")
+                //                            .foregroundColor(.white)
+                //                        Text(" \(remaining)x ").foregroundColor(.white).font(.headline)
+                //                    }
+                //                    .padding(8)
+                //                    .background(Color.white.opacity(0.4))
+                //                    .cornerRadius(12)
+                //                }
+                //                .alert("You have \(remaining) attempts", isPresented: $showAttemptsPopup) {
+                //                    Button("OK", role: .cancel) {}
+                //                }
             }
-            .padding(.leading, -410)
-            .padding(.bottom, 200)
-            
-            VStack{
+            .padding(.leading, -400)
+            .padding(.bottom, 300)
+
+            VStack {
                 HStack(alignment: .top, spacing: -15) {
                     ZStack {
-                       
 
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.ultraThinMaterial)
@@ -257,7 +252,6 @@ struct GameView: View {
                         .transition(.move(edge: .bottom))
                         .animation(.spring(response: 0.5, dampingFraction: 0.7), value: showHintPopup)
 
-
                     }
 
                     .frame(width: 450, height: 130)
@@ -276,7 +270,7 @@ struct GameView: View {
                 }
                 .padding(.trailing, -250)
                 .padding(.top, 50)
-                
+
                 VStack(spacing: -10) {
                     Text(slots.joined())
                         .font(.system(size: 20, weight: .medium, design: .rounded))
@@ -285,7 +279,7 @@ struct GameView: View {
                         .frame(maxWidth: 250)
                         .background(.ultraThinMaterial)
                         .cornerRadius(12)
-                    
+
                     HStack(alignment: .top, spacing: 10) {
                         ForEach(slots.indices, id: \.self) { index in
                             InfiniteLetterPicker(selectedLetter: $slots[index])
@@ -295,21 +289,35 @@ struct GameView: View {
                     Button("Submit") {
                         let result = slots.joined().trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
                         let correctAnswer = level.correctAnswer.uppercased()
-                        
-                        if remaining > 0 {
-                            if result == correctAnswer {
-                                isCorrect = true
-                                showWinPopup = true
-                                gameData.markLevelCompleted(levelKey)
-                                gameData.addCoins(10)
-                            } else {
-                                isCorrect = false
-                                showFailPopup = true
-                                gameData.registerFailedAttempt(for: levelKey)
+
+                        if result == correctAnswer {
+                            isCorrect = true
+                            showResult = true
+                            gameData.markLevelCompleted(levelKey)
+                            gameData.addCoins(10)
+
+                            // Move to next level after delay
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                gameData.moveToNextLevel(totalLevels: track.levels.count)
+                                navigateToMap = true
                             }
                         } else {
-                            showFailPopup = true
+                            isCorrect = false
+                            showResult = true
+                            gameData.registerFailedAttempt(for: levelKey)
                         }
+                    }
+                    .alert(isCorrect ? "Correct! 🎉" : "Try Again ❌", isPresented: $showResult) {
+                        Button("OK") {
+                            if isCorrect {
+                                // Reset slots for next level
+                                slots = Array(repeating: "A", count: slots.count)
+                            }
+                        }
+                    } message: {
+                        Text(
+                            isCorrect ? "You earned it! Next level is waiting!" : "Keep trying!"
+                        )
                     }
                     .padding()
                     .font(.system(size: 20, weight: .semibold))
@@ -317,16 +325,49 @@ struct GameView: View {
                     .padding(.horizontal, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.white.opacity(0.2))
+                            .fill(Color.c4)
                             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c4.opacity(0.4)))
                             .shadow(color: Color.c4, radius: 10, x: 8, y: 8)
                     )
-                    .padding(.leading, 600)
-                    .padding(.bottom, 40)
-                   
+                                        .padding(.leading, 600)
+                                        .padding(.bottom, 40)
+
+                    //                    Button("Submit") {
+                    //                        let result = slots.joined().trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+                    //                        let correctAnswer = level.correctAnswer.uppercased()
+                    //
+                    //
+                    //                        if remaining > 0 {
+                    //                            if result == correctAnswer {
+                    //                                isCorrect = true
+                    //                                showWinPopup = true
+                    //                                gameData.markLevelCompleted(levelKey)
+                    //                                gameData.addCoins(10)
+                    //                            } else {
+                    //                                isCorrect = false
+                    //                                showFailPopup = true
+                    //                                gameData.registerFailedAttempt(for: levelKey)
+                    //                            }
+                    //                        } else {
+                    //                            showFailPopup = true
+                    //                        }
+                    //                    }
+                    //                    .padding()
+                    //                    .font(.system(size: 20, weight: .semibold))
+                    //                    .foregroundColor(.white)
+                    //                    .padding(.horizontal, 10)
+                    //                    .background(
+                    //                        RoundedRectangle(cornerRadius: 20)
+                    //                            .fill(Color.c4)
+                    //                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c4.opacity(0.4)))
+                    //                            .shadow(color: Color.c4, radius: 10, x: 8, y: 8)
+                    //                    )
+                    //                    .padding(.leading, 600)
+                    //                    .padding(.bottom, 40)
+
                 }
             }
-            
+
             // Show Win Popup
             if showWinPopup {
                 WinPopup(
@@ -358,18 +399,18 @@ struct GameView: View {
             if showFailPopup {
                 FailPopup(
                     isPresented: $showFailPopup,
-                       attemptsRemaining: remaining,
-                       onRetry: {
-                           showFailPopup = false
-                       },
-                       onWait: {
-                           showFailPopup = false
-                       },
-                       onBuyCoins: {
-                           showFailPopup = false
-                           showStoreSheet = true
-                    
-                 // افتح شاشة المتجر
+                    attemptsRemaining: remaining,
+                    onRetry: {
+                        showFailPopup = false
+                    },
+                    onWait: {
+                        showFailPopup = false
+                    },
+                    onBuyCoins: {
+                        showFailPopup = false
+                        showStoreSheet = true
+
+                        // افتح شاشة المتجر
                         if gameData.useCoins(50) {
                             let current = gameData.playerProgress?.failedAttempts[levelKey] ?? 0
                             if current > 0 {
@@ -381,17 +422,18 @@ struct GameView: View {
                         }
                     },
                     navigateToMainMenu: {
-                           navigateToMainMenu = true
+                        navigateToMainMenu = true
                     }
                 )
             }
+            // MARK: to be
             if showStoreSheet {
-              //  Color.black.opacity(0.5)
-                   // .ignoresSafeArea()
-                 //   .transition(.opacity)
+                //  Color.black.opacity(0.5)
+                // .ignoresSafeArea()
+                //   .transition(.opacity)
 
                 CoinStoreView(isPresented: $showStoreSheet)
-                  
+
                     //.frame(maxWidth: .infinity, maxHeight: .infinity)
                     .transition(.move(edge: .bottom))
                     .zIndex(1)
@@ -400,18 +442,18 @@ struct GameView: View {
         .animation(.spring(), value: showStoreSheet)
         .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
-//        .sheet(isPresented: $showStoreSheet) {
-//            CoinStoreView(isPresented: .constant(true))
-//                .environment(gameData)  // تمرير environment
-//        }
+        //        .sheet(isPresented: $showStoreSheet) {
+        //            CoinStoreView(isPresented: .constant(true))
+        //                .environment(gameData)  // تمرير environment
+        //        }
         // במקום .sheet:
 
-//        // ── Overlay pop-up ──
-//        if showStoreSheet {
-//            CoinStoreView(isPresented: $showStoreSheet)
-//                .zIndex(1)
-//        }
-      
+        //        // ── Overlay pop-up ──
+        //        if showStoreSheet {
+        //            CoinStoreView(isPresented: $showStoreSheet)
+        //                .zIndex(1)
+        //        }
+
     }
 
     func timeUntilReset(lastDate: Date) -> String {
@@ -424,9 +466,6 @@ struct GameView: View {
         return String(format: "%02d ساعة و %02d دقيقة", h, m)
     }
 }
-
-
-
 
 struct GameView_Previews: PreviewProvider {
     static var previews: some View {

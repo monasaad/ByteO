@@ -22,15 +22,15 @@ struct CustomAlertView: View {
                     .foregroundColor(.white.opacity(0.9))
                 
                 HStack(spacing: 20) {
-                    Button(secondaryButtonTitle) {
-                        secondaryAction()
-                    }
-                    .buttonStyle(AlertButtonStyle(backgroundColor: .gray))
-                    
+//                    Button(secondaryButtonTitle) {
+//                        secondaryAction()
+//                    }
+//                    .buttonStyle(AlertButtonStyle(backgroundColor: .gray))
+//                    
                     Button(primaryButtonTitle) {
                         primaryAction()
                     }
-                    .buttonStyle(AlertButtonStyle(backgroundColor: .c2))
+                    .buttonStyle(AlertButtonStyle(backgroundColor: .c4))
                 }
             }
             .padding()

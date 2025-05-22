@@ -1,4 +1,3 @@
-
 import Foundation
 import SwiftData
 import SwiftUI
@@ -14,13 +13,11 @@ class PlayerProgress {
     var hasSeenIntro: Bool = false
     var lastResetDate: Date
     var achievementsUnlocked: [String] = []
-    
 
     init() {
-        self.lastResetDate = Date() // ✅ حطيناها هنا بدلاً من .now مباشرة
+        self.lastResetDate = Date()  // ✅ حطيناها هنا بدلاً من .now مباشرة
     }
 }
-
 
 // level
 struct StaticLevel: Identifiable {
@@ -52,12 +49,13 @@ struct LevelData {
         LevelTrack(
             name: "Teal Line",
             color: .teal,
+
             levels: [
                 StaticLevel(
                     number: 1,
                     question: "King Abdullah Financial District",
                     encryptedText: "See you at Rodbd \nThe Key : - 3",
-                    correctAnswer: "OLAYA", //Olaya
+                    correctAnswer: "OLAYA",  //Olaya
                     hint: "Each letter moved back 3 steps in the alphabet. Think of a famous me"
                 ),
                 StaticLevel(
@@ -66,98 +64,111 @@ struct LevelData {
                     encryptedText: "GrUze",
                     correctAnswer: "AlOud",
                     hint: "Where heritage meets the tracks! This station carries the scent of history"
-                    
-                ),
-                StaticLevel(
-                    number: 3,
-                    question: "Decode the title of Abdullah Station",
-                    encryptedText: "Oirm",
-                    correctAnswer: "AAAAZ",//King
-                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                    
-                ),
-                
 
-                
+                ),
+                //                StaticLevel(
+                //                    number: 3,
+                //                    question: "Decode the title of Abdullah Station",
+                //                    encryptedText: "Oirm",
+                //                    correctAnswer: "AAAAZ",//King
+                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
+                //
+                //                ),
+
             ]
         ),
 
-        // 🟥 المسار الأحمر
+        // Yellow Line
         LevelTrack(
             name: "Yellow Line",
             color: .yellow,
             levels: [
+                //                StaticLevel(
+                //                    number: 1,
+                //                    question: "Find the university station!",
+                //                    encryptedText: "GOQ",
+                //                    correctAnswer: "AAAAA",//KSU
+                //                    hint: "It’s a 3-letter abbreviation for a top Riyadh university 🎓 Shift each letter back 4 steps to decode it!"
+                //                ),
+                //                StaticLevel(
+                //                    number: 2,
+                //                    question: "Decode the title of Abdullah Station",
+                //                    encryptedText: "Oirm",
+                //                    correctAnswer: "AAAAA",//King
+                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
+                //
+                //                ),
                 StaticLevel(
                     number: 1,
-                    question: "Find the university station!",
-                    encryptedText: "GOQ",
-                    correctAnswer: "AAAAA",//KSU
-                    hint: "It’s a 3-letter abbreviation for a top Riyadh university 🎓 Shift each letter back 4 steps to decode it!"
+                    question: "Essential for life",
+                    encryptedText: "ZDWHU \nThe Key: -3",
+                    correctAnswer: "WATER",  // W (shifted back 3 from Z), A (from D), T (from W), etc.
+                    hint: "Each letter moved back 3 steps. You drink this daily."
                 ),
                 StaticLevel(
                     number: 2,
-                    question: "Decode the title of Abdullah Station",
-                    encryptedText: "Oirm",
-                    correctAnswer: "AAAAA",//King
-                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                    
+                    question: "Warm light in the sky",
+                    encryptedText: "VWDUV \nThe Key: -3",
+                    correctAnswer: "STARS",  // Encrypted: S→V, T→W, A→D, R→U, S→V
+                    hint: "Each letter moved back 3. They twinkle at night."
                 ),
-                StaticLevel(
-                    number: 3,
-                    question: "Decode the title of Abdullah Statio",
-                    encryptedText: "Oirm",
-                    correctAnswer: "AAAAA",//King
-                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                    
-                ),
+                //                StaticLevel(
+                //                    number: 3,
+                //                    question: "Decode the title of Abdullah Statio",
+                //                    encryptedText: "Oirm",
+                //                    correctAnswer: "AAAAA",//King
+                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
+                //
+                //                ),
             ]
         ),
-        // 🟥 المسار الأحمر
+        //Purple line
         LevelTrack(
             name: "Purple line",
             color: .purple,
             levels: [
+                //                StaticLevel(
+                //                    number: 1,
+                //                    question: "Find the university station!",
+                //                    encryptedText: "GOQ",
+                //                    correctAnswer: "AAAAA",//KSU
+                //                    hint: "It’s a 3-letter abbreviation for a top Riyadh university 🎓 Shift each letter back 4 steps to decode it!"
+                //                ),
+                //                StaticLevel(
+                //                    number: 2,
+                //                    question: "Decode the title of Abdullah Statio",
+                //                    encryptedText: "Oirm",
+                //                    correctAnswer: "AAAAA",//King
+                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
+                //
+                //                ),
+                //
+                //                StaticLevel(
+                //                    number: 3,
+                //                    question: "Decode the title of Abdullah Statio",
+                //                    encryptedText: "Oirm",
+                //                    correctAnswer: "AAAAA",//King
+                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
+                //
+                //                ),
                 StaticLevel(
                     number: 1,
-                    question: "Find the university station!",
-                    encryptedText: "GOQ",
-                    correctAnswer: "AAAAA",//KSU
-                    hint: "It’s a 3-letter abbreviation for a top Riyadh university 🎓 Shift each letter back 4 steps to decode it!"
+                    question: "Sweet and cold treat",
+                    encryptedText: "IXGJH \nThe Key: -3",
+                    correctAnswer: "FUDGE",  // Encrypted: F→I, U→X, D→G, G→J, E→H
+                    hint: "Each letter moved back 3. A creamy dessert."
                 ),
                 StaticLevel(
                     number: 2,
-                    question: "Decode the title of Abdullah Statio",
-                    encryptedText: "Oirm",
-                    correctAnswer: "AAAAA",//King
-                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                    
-                ),
-            
-                StaticLevel(
-                    number: 3,
-                    question: "Decode the title of Abdullah Statio",
-                    encryptedText: "Oirm",
-                    correctAnswer: "AAAAA",//King
-                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                    
+                        question: "City of Lights",
+                        encryptedText: "SDULV \nThe Key: -3",
+                        correctAnswer: "PARIS", // Encrypted: P→S, A→D, R→U, I→L, S→V
+                        hint: "Each letter moved back 3. Romantic capital of France."
                 ),
             ]
-        )
+        ),
     ]
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 @Observable
 class GameDataStore {
@@ -285,20 +296,46 @@ class GameDataStore {
     }
 
     // ⏫ الانتقال للمستوى التالي
+    //    @MainActor
+    //    func moveToNextLevel(totalLevels: Int) {
+    //        guard let progress = playerProgress else { return }
+    //
+    //        if progress.currentLevelIndex + 1 < totalLevels {
+    //            progress.currentLevelIndex += 1
+    //        } else {
+    //            progress.currentLevelIndex = 0
+    //            progress.currentTrackIndex += 1
+    //        }
+    //
+    //        save()
+    //    }
     @MainActor
     func moveToNextLevel(totalLevels: Int) {
         guard let progress = playerProgress else { return }
 
+        // 1. التأكد من وجود مسارات
+        guard !LevelData.allTracks.isEmpty else { return }
+
+        // 2. البقاء ضمن حدود المسار الحالي
+        progress.currentTrackIndex = min(max(progress.currentTrackIndex, 0), LevelData.allTracks.count - 1)
+
+        // 3. الانتقال داخل المسار الحالي
         if progress.currentLevelIndex + 1 < totalLevels {
             progress.currentLevelIndex += 1
         } else {
+            // 4. الانتقال لمسار جديد مع الضبط التلقائي
+            progress.currentTrackIndex = min(progress.currentTrackIndex + 1, LevelData.allTracks.count - 1)
             progress.currentLevelIndex = 0
-            progress.currentTrackIndex += 1
+
+            // 5. إذا كنا في آخر مسار، إعادة التعيين
+            if progress.currentTrackIndex == LevelData.allTracks.count - 1 {
+                progress.currentLevelIndex = min(progress.currentLevelIndex, LevelData.allTracks.last?.levels.count ?? 0)
+            }
         }
 
+        // 6. حفظ التغييرات
         save()
     }
-
     // 🏆 فتح إنجاز جديد
     @MainActor
     func unlockAchievement(_ name: String) {

@@ -35,19 +35,21 @@ struct MainMenuView: View {
                 HStack{
                      
                     VStack{
+                       
                         // 🏆 الإنجازات
-                        Button(action: {
-                            navigateToAchievements = true
-                        }) {
-                            Image(systemName: "trophy")
-                                .frame(width: 40, height: 20)
-                                .padding(10)
-                                .background(.ultraThinMaterial)
-                                .foregroundColor(.white)
-                                .clipShape(Circle())
-                                .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
-                            
-                        }
+                        // MARK:
+                        //                        Button(action: {
+//                            navigateToAchievements = true
+//                        }) {
+//                            Image(systemName: "trophy")
+//                                .frame(width: 40, height: 20)
+//                                .padding(10)
+//                                .background(.ultraThinMaterial)
+//                                .foregroundColor(.white)
+//                                .clipShape(Circle())
+//                                .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
+//                            
+//                        }
                         
 //                        // 🔇 زر الصوت
 //                        Button(action: toggleSound) {
@@ -75,20 +77,20 @@ struct MainMenuView: View {
                  
                     
                         // 💰 عدد الكوينز
-                        Button(action: {
-                            showCoinStore = true
-                        }) {
-                            HStack {
-                                Image(systemName: "wallet.bifold.fill")
-                                    .frame(width: 40, height: 20)
-                                    .padding(10)
-                                    .background(.ultraThinMaterial)
-                                    .foregroundColor(.white)
-                                    .clipShape(Circle())
-                                    .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
-//                                Text("\(gameData.playerProgress?.coins ?? 0)")
-                            }
-                        }
+//                        Button(action: {
+//                            showCoinStore = true
+//                        }) {
+//                            HStack {
+//                                Image(systemName: "wallet.bifold.fill")
+//                                    .frame(width: 40, height: 20)
+//                                    .padding(10)
+//                                    .background(.ultraThinMaterial)
+//                                    .foregroundColor(.white)
+//                                    .clipShape(Circle())
+//                                    .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
+////                                Text("\(gameData.playerProgress?.coins ?? 0)")
+//                            }
+//                        }
                         Spacer()
                   
                         
@@ -176,6 +178,8 @@ struct MainMenuView: View {
                 .padding(.leading,100)
                 .animation(.spring(), value: showCoinStore)
                 // ── Overlay pop-up ──
+                
+                //MARK: to be
                 if showCoinStore {
                     CoinStoreView(isPresented: $showCoinStore)
                         .frame(width: 340, height: 420)        // ← fixed size
