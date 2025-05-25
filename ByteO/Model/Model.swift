@@ -19,7 +19,7 @@ class PlayerProgress {
     }
 }
 
-// level
+// Level
 struct StaticLevel: Identifiable {
     let id = UUID()
     let number: Int
@@ -33,8 +33,7 @@ struct StaticLevel: Identifiable {
     // let imageName: String?
 }
 
-// line
-
+// Line
 struct LevelTrack: Identifiable {
     let id = UUID()
     let name: String
@@ -44,82 +43,70 @@ struct LevelTrack: Identifiable {
 
 struct LevelData {
     static let allTracks: [LevelTrack] = [
-
-        // 🟦 المسار الأزرق
-        LevelTrack(
-            name: "Teal Line",
-            color: .teal,
-
-            levels: [
-                StaticLevel(
-                    number: 1,
-                    question: "King Abdullah Financial District",
-                    encryptedText: "See you at Rodbd \nThe Key : - 3",
-                    correctAnswer: "OLAYA",  //Olaya
-                    hint: "Each letter moved back 3 steps in the alphabet. Think of a famous me"
-                ),
-                StaticLevel(
-                    number: 2,
-                    question: "Decode the message at GrUze Staion \nThe Key : - 6",
-                    encryptedText: "GrUze",
-                    correctAnswer: "AlOud",
-                    hint: "Where heritage meets the tracks! This station carries the scent of history"
-
-                ),
-                //                StaticLevel(
-                //                    number: 3,
-                //                    question: "Decode the title of Abdullah Station",
-                //                    encryptedText: "Oirm",
-                //                    correctAnswer: "AAAAZ",//King
-                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                //
-                //                ),
-
-            ]
-        ),
-
+        
         // Yellow Line
         LevelTrack(
             name: "Yellow Line",
             color: .yellow,
             levels: [
-                //                StaticLevel(
-                //                    number: 1,
-                //                    question: "Find the university station!",
-                //                    encryptedText: "GOQ",
-                //                    correctAnswer: "AAAAA",//KSU
-                //                    hint: "It’s a 3-letter abbreviation for a top Riyadh university 🎓 Shift each letter back 4 steps to decode it!"
-                //                ),
-                //                StaticLevel(
-                //                    number: 2,
-                //                    question: "Decode the title of Abdullah Station",
-                //                    encryptedText: "Oirm",
-                //                    correctAnswer: "AAAAA",//King
-                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
                 //
-                //                ),
                 StaticLevel(
                     number: 1,
-                    question: "Essential for life",
-                    encryptedText: "ZDWHU \nThe Key: -3",
-                    correctAnswer: "WATER",  // W (shifted back 3 from Z), A (from D), T (from W), etc.
-                    hint: "Each letter moved back 3 steps. You drink this daily."
+                    question: "Terminal Station",
+                    encryptedText: "Seek me where princesses pursue knowledge at **STZWF** \nThe Key: -2",
+                    correctAnswer: "NOURA",// NOURA
+                    hint: "Shift each letter back 2 places to reveal the 5-letter name of your next stop"
                 ),
                 StaticLevel(
                     number: 2,
-                    question: "Warm light in the sky",
-                    encryptedText: "VWDUV \nThe Key: -3",
-                    correctAnswer: "STARS",  // Encrypted: S→V, T→W, A→D, R→U, S→V
-                    hint: "Each letter moved back 3. They twinkle at night."
+                    question: "PNU Station",
+                    encryptedText: "Ha! You made it this far—now race to **WEFMG** before I get bored \nThe Key: - 4",
+                    correctAnswer: "SABIC",// SABIC
+                    hint: "Shift each letter back 4 places to reveal the 5-letter name of your next stop"
                 ),
-                //                StaticLevel(
-                //                    number: 3,
-                //                    question: "Decode the title of Abdullah Statio",
-                //                    encryptedText: "Oirm",
-                //                    correctAnswer: "AAAAA",//King
-                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                //
-                //                ),
+            
+           
+                StaticLevel(
+                    number: 3,
+                    question: "SABIC Station",
+                    encryptedText: "I’m watching you from a **WRZHU** \nThe Key : - 3",
+                    correctAnswer: "TOWER",// TOWER
+                    hint: "Shift each letter back 3 places to reveal the 5-letter name of your next stop"
+                
+                ),
+            ]
+        ),
+        
+        // 🟦 المسار الأزرق
+        LevelTrack(
+            name: "Teal Line",
+            color: .teal,
+            levels: [
+                StaticLevel(
+                    number: 1,
+                    question: "King Abdullah Financial District Station",
+                    encryptedText: "See you at **RODBD** \nThe Key : - 3",
+                    correctAnswer: "OLAYA",  //OLAYA
+                    hint: "Shift each letter back 3 places to reveal the 5-letter name of your next stop"
+                ),
+                StaticLevel(
+                    number: 2,
+                    question: "OLAYA Station",
+                    encryptedText: "Try to find me in **GRUZE**! \nThe Key : - 6",
+                    correctAnswer: "ALOUD", //ALOUD
+                    hint: "Shift each letter back 6 places to reveal the 5-letter name of your next stop. Where heritage meets the tracks! This station carries the scent of history"
+                ),
+                
+                
+                
+                StaticLevel(
+                    number: 3,
+                    question: "ALOUD Station",
+                    encryptedText: "**XGHKG** is the station where the desert blooms. \nThe Key : - 6",
+                    correctAnswer: "RABEA", //AL RABEA
+                    hint: "Shift each letter back 6 places to reveal the 5-letter name of your next stop. "
+                ),
+           
             ]
         ),
         //Purple line
@@ -127,48 +114,25 @@ struct LevelData {
             name: "Purple line",
             color: .purple,
             levels: [
-                //                StaticLevel(
-                //                    number: 1,
-                //                    question: "Find the university station!",
-                //                    encryptedText: "GOQ",
-                //                    correctAnswer: "AAAAA",//KSU
-                //                    hint: "It’s a 3-letter abbreviation for a top Riyadh university 🎓 Shift each letter back 4 steps to decode it!"
-                //                ),
-                //                StaticLevel(
-                //                    number: 2,
-                //                    question: "Decode the title of Abdullah Statio",
-                //                    encryptedText: "Oirm",
-                //                    correctAnswer: "AAAAA",//King
-                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                //
-                //                ),
-                //
-                //                StaticLevel(
-                //                    number: 3,
-                //                    question: "Decode the title of Abdullah Statio",
-                //                    encryptedText: "Oirm",
-                //                    correctAnswer: "AAAAA",//King
-                //                    hint: "ust 4 letters, hiding a royal title 👑 Shift each letter back 5 steps to reveal it! The full station name is: __ Abdullah"
-                //
-                //                ),
                 StaticLevel(
                     number: 1,
-                    question: "Sweet and cold treat",
-                    encryptedText: "IXGJH \nThe Key: -3",
-                    correctAnswer: "FUDGE",  // Encrypted: F→I, U→X, D→G, G→J, E→H
-                    hint: "Each letter moved back 3. A creamy dessert."
+                    question: "AL RABEA Station",
+                    encryptedText: "ByteO, If step into OHTYH. I’ll paint the tracks with your blood.\nThe Key: -7",
+                    correctAnswer: "HAMRA",  // HAMRA
+                    hint: "Shift each letter back 7 places to reveal the 5-letter name of your next stop"
                 ),
                 StaticLevel(
                     number: 2,
-                        question: "City of Lights",
-                        encryptedText: "SDULV \nThe Key: -3",
-                        correctAnswer: "PARIS", // Encrypted: P→S, A→D, R→U, I→L, S→V
+                        question: "AL HAMRA Station",
+                        encryptedText: "ByteO, wanna finally see me? let meet at **SALAM**. \nThe Key: -3",
+                        correctAnswer: "SALAM", //
                         hint: "Each letter moved back 3. Romantic capital of France."
                 ),
             ]
         ),
     ]
 }
+
 
 @Observable
 class GameDataStore {
