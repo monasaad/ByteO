@@ -171,8 +171,8 @@ struct GameView: View {
 
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.ultraThinMaterial)
-                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c2.opacity(0.8), lineWidth: 1.8))
-                            .shadow(color: .c2.opacity(0.5), radius: 8, x: 0, y: 5)
+                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color(track.color).opacity(0.8), lineWidth: 1.8))
+                            .shadow(color: track.color.opacity(0.5), radius: 8, x: 0, y: 5)
 
                         VStack(alignment: .leading, spacing: 5) {
                             Text("\(track.name) - Level \(level.number)")

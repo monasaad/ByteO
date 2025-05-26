@@ -7,8 +7,16 @@ struct CustomAlertView: View {
     let secondaryButtonTitle: String
     let primaryAction: () -> Void
     let secondaryAction: () -> Void
-    
+    @Environment(GameDataStore.self) var gameData
+
+
     var body: some View {
+        let progress = gameData.playerProgress
+        let tracks = LevelData.allTracks
+        let rawTrackIndex = progress?.currentTrackIndex ?? 0
+
+        let trackIndex = min(max(0, rawTrackIndex), tracks.count - 1)
+        let track = tracks[trackIndex]
         ZStack {
             Color.black.opacity(0.4).ignoresSafeArea()
             
@@ -37,8 +45,8 @@ struct CustomAlertView: View {
             .background(
                 RoundedRectangle(cornerRadius: 20)
                     .fill(.ultraThinMaterial)
-                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c2.opacity(0.8), lineWidth: 1.8))
-                    .shadow(color: .c2.opacity(0.5), radius: 8, x: 0, y: 5)
+                    .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color(track.color).opacity(0.8), lineWidth: 1.8))
+                    .shadow(color: track.color.opacity(0.5), radius: 8, x: 0, y: 5)
             )
             .padding()
         }
@@ -63,4 +71,23 @@ struct AlertButtonStyle: ButtonStyle {
             )
             .scaleEffect(configuration.isPressed ? 0.95 : 1)
     }
+}
+#Preview{
+    CustomAlertView(
+        title: "Hint",
+        message: "\("Hint")",
+
+        // if hints is used, change watch ad to Watch Ad
+        primaryButtonTitle: "Got it!",
+        secondaryButtonTitle: "Cancel",
+
+        primaryAction: {
+            // Handle ad watching logic
+            print("Start playing ad...")
+            
+        },
+        secondaryAction: {
+            print("Start playing ad...")
+        }
+    )
 }
