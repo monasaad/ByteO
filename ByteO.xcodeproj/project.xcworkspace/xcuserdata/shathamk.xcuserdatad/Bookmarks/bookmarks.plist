@@ -36,11 +36,14 @@
 				<key>focused</key>
 				<string></string>
 				<key>leading</key>
-				<string>    MainMenuView().environment(GameDataStore.shared)
-}
+				<string>
+
 </string>
 				<key>trailing</key>
-				<string></string>
+				<string>
+#Preview {
+    MainMenuView().environment(GameDataStore.shared)
+</string>
 			</dict>
 			<key>type</key>
 			<string>bookmark</string>

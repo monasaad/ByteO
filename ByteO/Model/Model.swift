@@ -23,8 +23,10 @@ class PlayerProgress {
 struct StaticLevel: Identifiable {
     let id = UUID()
     let number: Int
+    let station: String
     let question: String
     let encryptedText: String
+    let key: String
     let correctAnswer: String
     let hint: String
     // إذا حبيت تضيف لاحقاً:
@@ -52,24 +54,30 @@ struct LevelData {
                 //
                 StaticLevel(
                     number: 1,
-                    question: "Terminal Station",
-                    encryptedText: "Seek me where princesses pursue knowledge at **STZWF** \nThe Key: -2",
+                    station:"Terminal Station",
+                    question:"Seek me where princesses pursue knowledge at PQWTC",
+                    encryptedText:"PQWTC",
+                    key:"-2",
                     correctAnswer: "NOURA",// NOURA
                     hint: "Shift each letter back 2 places to reveal the 5-letter name of your next stop"
                 ),
                 StaticLevel(
                     number: 2,
-                    question: "PNU Station",
-                    encryptedText: "Ha! You made it this far—now race to **WEFMG** before I get bored \nThe Key: - 4",
+                    station:"PNU Station",
+                    question: "Ha! You made it this far—now race to WEFMG before I get bored",
+                    encryptedText:"WEFMG",
+                    key:"-4" ,
                     correctAnswer: "SABIC",// SABIC
                     hint: "Shift each letter back 4 places to reveal the 5-letter name of your next stop"
                 ),
-            
-           
+                
+                
                 StaticLevel(
                     number: 3,
-                    question: "SABIC Station",
-                    encryptedText: "I’m watching you from a **WRZHU** \nThe Key : - 3",
+                    station: "SABIC Station",
+                    question: "I’m watching you from a WRZHU",
+                    encryptedText:"WRZHU",
+                    key:"-3" ,
                     correctAnswer: "TOWER",// TOWER
                     hint: "Shift each letter back 3 places to reveal the 5-letter name of your next stop"
                 
@@ -84,15 +92,19 @@ struct LevelData {
             levels: [
                 StaticLevel(
                     number: 1,
-                    question: "King Abdullah Financial District Station",
-                    encryptedText: "See you at **RODBD** \nThe Key : - 3",
+                    station: "King Abdullah Financial District Station",
+                    question: "See you at RODBD",
+                    encryptedText: "RODBD",
+                    key: "-3",
                     correctAnswer: "OLAYA",  //OLAYA
                     hint: "Shift each letter back 3 places to reveal the 5-letter name of your next stop"
                 ),
                 StaticLevel(
                     number: 2,
-                    question: "OLAYA Station",
-                    encryptedText: "Try to find me in **GRUZE**! \nThe Key : - 6",
+                    station: "OLAYA Station",
+                    question: "Try to find me in GRUAJ!",
+                    encryptedText: "GRUAJ",
+                    key: "-6",
                     correctAnswer: "ALOUD", //ALOUD
                     hint: "Shift each letter back 6 places to reveal the 5-letter name of your next stop. Where heritage meets the tracks! This station carries the scent of history"
                 ),
@@ -101,8 +113,10 @@ struct LevelData {
                 
                 StaticLevel(
                     number: 3,
-                    question: "ALOUD Station",
-                    encryptedText: "**XGHKG** is the station where the desert blooms. \nThe Key : - 6",
+                    station: "ALOUD Station",
+                    question:"XGHKG is the station where the desert blooms.",
+                    encryptedText:"XGHKG",
+                    key: "-6",
                     correctAnswer: "RABEA", //AL RABEA
                     hint: "Shift each letter back 6 places to reveal the 5-letter name of your next stop. "
                 ),
@@ -116,17 +130,21 @@ struct LevelData {
             levels: [
                 StaticLevel(
                     number: 1,
-                    question: "AL RABEA Station",
-                    encryptedText: "ByteO, If step into OHTYH. I’ll paint the tracks with your blood.\nThe Key: -7",
+                    station: "AL RABEA Station",
+                    question:"ByteO, If step into OHTYH. I’ll paint the tracks with your blood.\nThe Key: -7",
+                    encryptedText: "OHTYH",
+                    key:"-7",
                     correctAnswer: "HAMRA",  // HAMRA
                     hint: "Shift each letter back 7 places to reveal the 5-letter name of your next stop"
                 ),
                 StaticLevel(
                     number: 2,
-                        question: "AL HAMRA Station",
-                        encryptedText: "ByteO, wanna finally see me? let meet at **SALAM**. \nThe Key: -3",
-                        correctAnswer: "SALAM", //
-                        hint: "Each letter moved back 3. Romantic capital of France."
+                    station: "AL HAMRA Station",
+                    question: "ByteO, wanna finally see me? let meet at AITIU. \nThe Key: -3",
+                    encryptedText: "AITIU",
+                    key:"-8",
+                    correctAnswer: "SALAM", //
+                    hint: "Each letter moved back 8. Romantic capital of France."
                 ),
             ]
         ),

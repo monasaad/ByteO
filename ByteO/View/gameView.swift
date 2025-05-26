@@ -65,8 +65,25 @@ struct GameView: View {
     @State private var showWinPopup = false
     @State private var showFailPopup = false
     @State private var showStoreSheet = false
+    private func makeAttributedQuestion(
+      question: String,
+      highlight: String,
+      highlightColor: Color
+    ) -> AttributedString {
+      var attr = (try? AttributedString(markdown: question))
+                 ?? AttributedString(question)
+      if let range = attr.range(of: highlight) {
+        // the color of the encrypted message change based on color track
+        attr[range].foregroundColor = highlightColor.opacity(0.9)
+        // the encrypted message is bold
+        attr[range].inlinePresentationIntent = .stronglyEmphasized
+
+      }
+      return attr
+    }
 
     var body: some View {
+        
         let progress = gameData.playerProgress
         let tracks = LevelData.allTracks
 
@@ -82,7 +99,8 @@ struct GameView: View {
 
         let attemptsUsed = progress?.failedAttempts[levelKey] ?? 0
         let remaining = max(3 - attemptsUsed, 0)
-
+      
+   
         ZStack {
             //TODO
             if showAdPrompt {
@@ -174,27 +192,48 @@ struct GameView: View {
                             .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color(track.color).opacity(0.8), lineWidth: 1.8))
                             .shadow(color: track.color.opacity(0.5), radius: 8, x: 0, y: 5)
 
-                        VStack(alignment: .leading, spacing: 5) {
+                        VStack(alignment: .leading, spacing: 7) {
                             Text("\(track.name) - Level \(level.number)")
                                 .font(.system(size: 18, weight: .bold, design: .monospaced))
                                 .foregroundColor(track.color)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            Text("\(level.question)")
+                            Text("\(level.station)")
                                 .font(.system(size: 18, weight: .bold, design: .monospaced))
                                 .foregroundColor(.white.opacity(0.9))
                                 .multilineTextAlignment(.leading)  // النص يبدأ من اليسار
                                 .lineLimit(nil)  // عدد غير محدود من الأسطر
                                 .fixedSize(horizontal: false, vertical: true)  // التفاف تلقائي
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                            Text("Encrypted messages: \(level.encryptedText)")
+                       
+
+                            // Single Text that applies all your styling
+                            Text(
+                              makeAttributedQuestion(
+                                question: level.question,
+                                highlight: level.encryptedText,
+                                highlightColor: track.color
+                              )
+                            )
+                            .font(.system(size: 16, design: .monospaced))
+                            .foregroundColor(.white.opacity(0.9))
+                            .multilineTextAlignment(.leading)
+                            .lineLimit(nil)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            Text("The key : \(level.key)")
                                 .font(.system(size: 16, design: .monospaced))
                                 .foregroundColor(.white.opacity(0.9))
-                                .multilineTextAlignment(.leading)  // النص يبدأ من اليسار
+                                .multilineTextAlignment(.leading)
+                                .lineLimit(nil)
+                                .fixedSize(horizontal: false, vertical: true)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+
+                         // النص يبدأ من اليسار
                                 .lineLimit(nil)  // عدد غير محدود من الأسطر
                                 .fixedSize(horizontal: false, vertical: true)  // التفاف تلقائي
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .padding(.bottom, 20)
+                        //.padding(.bottom, 20)
                         .padding()
                         .offset(x: animationOffset)
                         .onAppear {
@@ -325,9 +364,9 @@ struct GameView: View {
                     .padding(.horizontal, 10)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.c4)
-                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c4.opacity(0.4)))
-                            .shadow(color: Color.c4, radius: 10, x: 8, y: 8)
+                            .fill(Color.c3)
+                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c3.opacity(0.4)))
+                            .shadow(color: Color.c3, radius: 10, x: 5, y: 5)
                     )
                                         .padding(.leading, 600)
                                         .padding(.bottom, 40)
