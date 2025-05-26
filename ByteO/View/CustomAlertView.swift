@@ -38,7 +38,7 @@ struct CustomAlertView: View {
                     Button(primaryButtonTitle) {
                         primaryAction()
                     }
-                    .buttonStyle(AlertButtonStyle(backgroundColor: .c4))
+                    .buttonStyle(AlertButtonStyle(backgroundColor: .c3))
                 }
             }
             .padding()
