@@ -131,7 +131,7 @@ struct LevelData {
                 StaticLevel(
                     number: 1,
                     station: "AL RABEA Station",
-                    question:"ByteO, If step into OHTYH. I’ll paint the tracks with your blood.\nThe Key: -7",
+                    question:"ByteO, If step into OHTYH. I’ll paint the tracks with your blood.",
                     encryptedText: "OHTYH",
                     key:"-7",
                     correctAnswer: "HAMRA",  // HAMRA
@@ -140,7 +140,7 @@ struct LevelData {
                 StaticLevel(
                     number: 2,
                     station: "AL HAMRA Station",
-                    question: "ByteO, wanna finally see me? let meet at AITIU. \nThe Key: -3",
+                    question: "ByteO, wanna finally see me? let meet at AITIU.",
                     encryptedText: "AITIU",
                     key:"-8",
                     correctAnswer: "SALAM", //
