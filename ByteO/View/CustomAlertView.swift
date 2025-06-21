@@ -22,7 +22,7 @@ struct CustomAlertView: View {
             
             VStack(spacing: 20) {
                 Text(title)
-                    .font(.title2.bold())
+                    .font(.title.bold())
                     .foregroundColor(.white)
                 
                 Text(message)
@@ -35,12 +35,13 @@ struct CustomAlertView: View {
 //                    }
 //                    .buttonStyle(AlertButtonStyle(backgroundColor: .gray))
 //                    
-                    Button(primaryButtonTitle) {
-                        primaryAction()
-                    }
-                    .buttonStyle(AlertButtonStyle(backgroundColor: .c3))
+//                    Button(primaryButtonTitle) {
+//                        primaryAction()
+//                    }
+//                    .buttonStyle(PrimaryButtonStyle(backgroundColor: track.color))
                 }
             }
+            .frame(width: 250, height: 200)  // <— control width & height here
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 20)
@@ -53,25 +54,6 @@ struct CustomAlertView: View {
     }
 }
 
-struct AlertButtonStyle: ButtonStyle {
-    var backgroundColor: Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.headline)
-            .foregroundColor(.white)
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 12)
-                    .fill(backgroundColor)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 12)
-                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                    )
-            )
-            .scaleEffect(configuration.isPressed ? 0.95 : 1)
-    }
-}
 #Preview{
     CustomAlertView(
         title: "Hint",

@@ -10,17 +10,11 @@ struct MainMenuView: View {
     @State private var navigateToAchievements = false
     @State private var showCoinStore = false
     // Audio state
-      @AppStorage("isMuted") private var isMuted: Bool = false
-      @State private var playerAudio: AVAudioPlayer?
-    // MARK: - Sound control
-    private func toggleSound() {
-        isMuted.toggle()
-        if isMuted {
-            playerAudio?.pause()
-        } else {
-            playerAudio?.play()
-        }
-    }
+    @AppStorage("isMuted") private var isMuted = false
+
+  
+
+
 
     var body: some View {
         NavigationStack {
@@ -35,44 +29,61 @@ struct MainMenuView: View {
                 HStack{
                      
                     VStack{
-                       
+                        
                         // 🏆 الإنجازات
                         // MARK:
                         //                        Button(action: {
-//                            navigateToAchievements = true
-//                        }) {
-//                            Image(systemName: "trophy")
-//                                .frame(width: 40, height: 20)
-//                                .padding(10)
-//                                .background(.ultraThinMaterial)
-//                                .foregroundColor(.white)
-//                                .clipShape(Circle())
-//                                .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
-//                            
-//                        }
+                        //                            navigateToAchievements = true
+                        //                        }) {
+                        //                            Image(systemName: "trophy")
+                        //                                .frame(width: 40, height: 20)
+                        //                                .padding(10)
+                        //                                .background(.ultraThinMaterial)
+                        //                                .foregroundColor(.white)
+                        //                                .clipShape(Circle())
+                        //                                .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
+                        //
+                        //                        }
                         
-//                        // 🔇 زر الصوت
-//                        Button(action: toggleSound) {
-//                            Image(systemName: settings?.soundMuted == true ? "speaker.slash.fill" : "speaker.wave.2.fill")
-//                                .scaledToFit()
-//                                .frame(width: 40, height: 20)
-//                                .padding(10)
-//                                .background(.ultraThinMaterial)
-//                                .foregroundColor(.white)
-//                                .clipShape(Circle())
-//                                .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
-//                        }
-                        // Sound toggle
-                                    Button(action: toggleSound) {
-                                        Image(systemName: isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill")
-                                            .scaledToFit()
-                                            .frame(width: 40, height: 20)
-                                            .padding(10)
-                                            .background(.ultraThinMaterial)
-                                            .foregroundColor(.white)
-                                            .clipShape(Circle())
-                                            .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
-                                    }
+                        //                        // 🔇 زر الصوت
+                        //                        Button(action: toggleSound) {
+                        //                            Image(systemName: settings?.soundMuted == true ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                        //                                .scaledToFit()
+                        //                                .frame(width: 40, height: 20)
+                        //                                .padding(10)
+                        //                                .background(.ultraThinMaterial)
+                        //                                .foregroundColor(.white)
+                        //                                .clipShape(Circle())
+                        //                                .shadow(color: .c4.opacity(0.7), radius: 8, x: 0, y: 5)
+                        //                        }
+                        
+                        // MARK: - Sound control
+                        Button(action: {
+                            isMuted.toggle()
+                            if isMuted {
+                                SoundManager.shared.pause()
+                            } else {
+                                SoundManager.shared.resume()
+                            }
+                        }) {
+                            if isMuted {
+                                Image(systemName: "speaker.slash.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                            } else {
+                                Image(systemName: "speaker.wave.2.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30, height: 30)
+                            }
+                        }
+                        .padding(10)
+                        .background(.ultraThinMaterial)
+                        .foregroundColor(.white)
+                        .clipShape(Circle())
+                        .shadow(color: .c4.opacity(0.7), radius: 8)
+                    
 
                  
                     
@@ -120,13 +131,12 @@ struct MainMenuView: View {
                     }) {
                         Text("Play")
                             .font(.system(size: 25, weight: .bold))
+                            .frame(width:60 , height:20)
                        
                     }
-                        .foregroundColor(.white)
-                        .frame(width: 95, height: 40) // ← الطول والعرض
-                        .background(Color.c4)      // ← لون الخلفية
-                        .cornerRadius(30)              // ← الزوايا الدائرية
-                        .shadow(color: .c4.opacity(0.4), radius: 8, x: 0, y: 5)
+                    .buttonStyle(PrimaryButtonStyle(backgroundColor:Color.c4))
+                    
+
 
                     // 🗺️ زر الخريطة
                     Button(action: {
@@ -134,14 +144,11 @@ struct MainMenuView: View {
                     }) {
                         Text("Map")
                             .font(.system(size: 25, weight: .bold))
+                            .frame(width:60 , height:20)
 
                          
                     }
-                    .foregroundColor(.white)
-                    .frame(width: 95, height: 40)
-                    .background(.ultraThinMaterial)
-                    .cornerRadius(30)
-                    .shadow(color: .c4.opacity(0.4), radius: 8, x: 0, y: 5)
+                    .buttonStyle(SecondaryButtonStyle(color:Color.c4))
 
                     Spacer()
 
@@ -149,33 +156,33 @@ struct MainMenuView: View {
                     NavigationLink("", destination: VideoContentView(), isActive: $navigateToIntro)
                     NavigationLink("", destination: GameView(), isActive: $navigateToGame)
                     NavigationLink("", destination: MapView(), isActive: $navigateToMap)
-                  
-                    .onAppear {
-                      // 1️⃣ configure the session
-                      do {
-                        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-                        try AVAudioSession.sharedInstance().setActive(true, options: [])
-                      } catch {
-                        print("⚠️ audio session error:", error)
-                      }
-
-                      // 2️⃣ load & prep the player
-                      if let url = Bundle.main.url(forResource: "CipherintheMetro", withExtension: "m4a") {
-                        playerAudio = try? AVAudioPlayer(contentsOf: url)
-                        playerAudio?.numberOfLoops = -1
-                        playerAudio?.prepareToPlay()
-                        if !isMuted {
-                          playerAudio?.play()
-                        }
-                      }
-                    }
-                    .onDisappear {
-                         playerAudio?.pause() // أو .stop() لو حاب توقفه نهائياً
-                     }
+//                  
+//                    .onAppear {
+//                      // 1️⃣ configure the session
+//                      do {
+//                        try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+//                        try AVAudioSession.sharedInstance().setActive(true, options: [])
+//                      } catch {
+//                        print("⚠️ audio session error:", error)
+//                      }
+//
+//                      // 2️⃣ load & prep the player
+//                      if let url = Bundle.main.url(forResource: "CipherintheMetro", withExtension: "m4a") {
+//                        playerAudio = try? AVAudioPlayer(contentsOf: url)
+//                        playerAudio?.numberOfLoops = -1
+//                        playerAudio?.prepareToPlay()
+//                        if !isMuted {
+//                          playerAudio?.play()
+//                        }
+//                      }
+//                    }
+//                    .onDisappear {
+//                         playerAudio?.pause() // أو .stop() لو حاب توقفه نهائياً
+//                     }
 
                 }
                 .padding(.top,100)
-                .padding(.leading,100)
+                .padding(.leading,170)
                 .animation(.spring(), value: showCoinStore)
                 // ── Overlay pop-up ──
                 

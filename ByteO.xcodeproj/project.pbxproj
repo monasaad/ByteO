@@ -35,7 +35,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		58745A0E2DE41A7E00A736E5 /* Exceptions for "ByteO" folder in "ByteO" target */ = {
+		58A0450E2E069A0400C6EB65 /* Exceptions for "ByteO" folder in "ByteO" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -48,7 +48,7 @@
 		F97685A92DC204B500745856 /* ByteO */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				58745A0E2DE41A7E00A736E5 /* Exceptions for "ByteO" folder in "ByteO" target */,
+				58A0450E2E069A0400C6EB65 /* Exceptions for "ByteO" folder in "ByteO" target */,
 			);
 			path = ByteO;
 			sourceTree = "<group>";

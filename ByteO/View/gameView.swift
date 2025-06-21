@@ -358,16 +358,8 @@ struct GameView: View {
                             isCorrect ? "You earned it! Next level is waiting!" : "Keep trying!"
                         )
                     }
-                    .padding()
-                    .font(.system(size: 20, weight: .semibold))
-                    .foregroundColor(.white)
-                    .padding(.horizontal, 10)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(Color.c3)
-                            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.c3.opacity(0.4)))
-                            .shadow(color: Color.c3, radius: 10, x: 5, y: 5)
-                    )
+                    //.buttonStyle(PrimaryButtonStyle(backgroundColor:Color.c3))
+                    .buttonStyle(SecondaryButtonStyle(color:track.color))
                                         .padding(.leading, 600)
                                         .padding(.bottom, 40)
 
