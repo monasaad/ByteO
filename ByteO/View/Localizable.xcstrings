@@ -1,0 +1,652 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "cancel" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إلغاء"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "cancel_button" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إلغاء"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "exit_game_title" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هل تريد الخروج من اللعبة؟"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to exit the game?"
+          }
+        }
+      }
+    },
+    "got_it_button" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تم!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Got it!"
+          }
+        }
+      }
+    },
+    "hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تلميح"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hint"
+          }
+        }
+      }
+    },
+    "map_button" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الخريطة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        }
+      }
+    },
+    "play_button" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ابدأ اللعب"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Play"
+          }
+        }
+      }
+    },
+    "purple_line_level1_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بايتو، إذا دخلت إلى OHTYH، سألون المسارات بدمك.\nالمفتاح: -7"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ByteO, If step into OHTYH. I’ll paint the tracks with your blood.\nThe Key: -7"
+          }
+        }
+      }
+    },
+    "purple_line_level1_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 7 خانات إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 7 places to reveal the 5-letter name of your next stop"
+          }
+        }
+      }
+    },
+    "purple_line_level1_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة الربيع"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AL RABEA Station"
+          }
+        }
+      }
+    },
+    "purple_line_level2_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بايتو، تبي تشوفني أخيرًا؟ خلنا نلتقي في *SALAM*. \nالمفتاح: -3"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ByteO, wanna finally see me? let meet at *SALAM*. \nThe Key: -3"
+          }
+        }
+      }
+    },
+    "purple_line_level2_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 3 خانات إلى الخلف. العاصمة الرومانسية لفرنسا."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Each letter moved back 3. Romantic capital of France."
+          }
+        }
+      }
+    },
+    "purple_line_level2_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة الحمراء"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AL HAMRA Station"
+          }
+        }
+      }
+    },
+    "purple_line_name" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المسار البنفسجي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Purple line"
+          }
+        }
+      }
+    },
+    "submit_button" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إرسال"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Submit"
+          }
+        }
+      }
+    },
+    "teal_line_level1_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أراك عند *RODBD* \nالمفتاح: -3"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See you at *RODBD* \nThe Key : - 3"
+          }
+        }
+      }
+    },
+    "teal_line_level1_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 3 خانات إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 3 places to reveal the 5-letter name of your next stop"
+          }
+        }
+      }
+    },
+    "teal_line_level1_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة مركز الملك عبدالله المالي"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "King Abdullah Financial District Station"
+          }
+        }
+      }
+    },
+    "teal_line_level2_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حاول العثور علي في *GRUZE*! \nالمفتاح: -6"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try to find me in *GRUZE*! \nThe Key : - 6"
+          }
+        }
+      }
+    },
+    "teal_line_level2_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 6 خانات إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف. حيث يلتقي التراث مع القضبان! هذه المحطة تحمل عبق التاريخ"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 6 places to reveal the 5-letter name of your next stop. Where heritage meets the tracks! This station carries the scent of history"
+          }
+        }
+      }
+    },
+    "teal_line_level2_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة العليا"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OLAYA Station"
+          }
+        }
+      }
+    },
+    "teal_line_level3_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "*XGHKG* هي المحطة التي تزهر فيها الصحراء. \nالمفتاح: -6"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "*XGHKG* is the station where the desert blooms. \nThe Key : - 6"
+          }
+        }
+      }
+    },
+    "teal_line_level3_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 6 خانات إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 6 places to reveal the 5-letter name of your next stop."
+          }
+        }
+      }
+    },
+    "teal_line_level3_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة الرابية"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ALOUD Station"
+          }
+        }
+      }
+    },
+    "teal_line_name" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المسار الأزرق"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teal Line"
+          }
+        }
+      }
+    },
+    "yellow_line_level1_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ابحث عني حيث تلاحق الأميرات المعرفة عند *STZWF* \nالمفتاح: -2"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seek me where princesses pursue knowledge at *STZWF* \nThe Key: -2"
+          }
+        }
+      }
+    },
+    "yellow_line_level1_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف خانتين إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 2 places to reveal the 5-letter name of your next stop"
+          }
+        }
+      }
+    },
+    "yellow_line_level1_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة النهاية"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terminal Station"
+          }
+        }
+      }
+    },
+    "yellow_line_level2_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ها! وصلت حتى هنا — أسرع إلى *WEFMG* قبل أن أملّ \nالمفتاح: -4"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ha! You made it this far—now race to *WEFMG* before I get bored \nThe Key: - 4"
+          }
+        }
+      }
+    },
+    "yellow_line_level2_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 4 خانات إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 4 places to reveal the 5-letter name of your next stop"
+          }
+        }
+      }
+    },
+    "yellow_line_level2_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة جامعة الملك عبدالعزيز"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PNU Station"
+          }
+        }
+      }
+    },
+    "yellow_line_level3_encryptedText" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أنا أراقبك من *WRZHU* \nالمفتاح: -3"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "I’m watching you from a *WRZHU* \nThe Key : - 3"
+          }
+        }
+      }
+    },
+    "yellow_line_level3_hint" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حرّك كل حرف 3 خانات إلى الخلف لتكشف اسم وجهتك التالية المؤلف من 5 أحرف"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shift each letter back 3 places to reveal the 5-letter name of your next stop"
+          }
+        }
+      }
+    },
+    "yellow_line_level3_question" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "محطة سابك"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SABIC Station"
+          }
+        }
+      }
+    },
+    "yellow_line_name" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المسار الأصفر"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yellow Line"
+          }
+        }
+      }
+    },
+    "yes_button" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نعم"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yes"
+          }
+        }
+      }
+    },
+    "you_have_attempts" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لديك %d محاولات"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You have %d attempts"
+          }
+        }
+      }
+    },
+    "your_current_balance" : {
+      "extractionState" : "migrated",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رصيدك الحالي هو: %d عملة"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your current balance is: %d coins"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
